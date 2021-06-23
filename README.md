@@ -100,7 +100,8 @@ We thank Facebook AI Research for the open-soource library [Faiss](https://githu
 
 #### TODO's
 - [x] Dependency & dataset setup.
-- [ ] Clear up and add complete train & test codes. 
-- [x] Make visualization notebook easier to use + better colors. 
-- [ ] Baseline code & weights (Modified DeepCluster, IIC, etc)
+- [x] Clear up and add complete train & test codes. 
+- [x] Baseline MDC code.
+- [ ] Weights and logs.
+- [ ] Make visualization notebook easier to use + better colors. 
 
