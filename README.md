@@ -74,9 +74,11 @@ nohup ./sh_files/test_picie.sh > logs/picie_test.out &
 ## Pretrained Models
 We have pretrained PiCIE weights. 
 |Method|Dataset    |Pre-trained weight             | Train log                |
-|------|-----------|-------------------------------|--------------------------|
-|PiCIE |COCO       |[weight](https://drive.google.com/file/d/1VI5detMlDNkwWpv7M-gk7aAHgfQVebWo/view?usp=sharing)|[log](logs/picie.out)     |
+|:----:|:---------:|:-----------------------------:|:------------------------:|
+|PiCIE |COCO       |[weight]()|[log](logs/picie.out)     |
 |PiCIE |Cityscapes |[weight]()|[log](logs/picie_city.out)|
+|MDC   |COCO       |[weight]()|[log]()|
+|MDC   |Cityscapes |[weight]()|[log]()|
 
 
 ## Visualization
@@ -94,11 +96,12 @@ If you find PiCIE useful in your research, please consider citing:
 }
 ```
 ## Acknowledgements 
-We thank Facebook AI Research for the open-soource library [Faiss](https://github.com/facebookresearch/faiss).
+We thank Facebook AI Research for the open-soource library [Faiss](https://github.com/facebookresearch/faiss). Also, our implementation largely borrows from [DeepCluster](https://github.com/facebookresearch/deepcluster) and [DeeperCluster](https://github.com/facebookresearch/DeeperCluster) for clustering with Faiss. 
 
 #### TODO's
 - [x] Dependency & dataset setup.
-- [ ] Clear up and add complete train & test codes. 
-- [x] Make visualization notebook easier to use + better colors. 
-- [ ] Baseline code & weights (Modified DeepCluster, IIC, etc)
+- [x] Clear up and add complete train & test codes. 
+- [x] Baseline MDC code.
+- [ ] Weights and logs.
+- [ ] Make visualization notebook easier to use + better colors. 
 
