@@ -94,7 +94,7 @@ If you find PiCIE useful in your research, please consider citing:
 }
 ```
 ## Acknowledgements 
-We thank Facebook AI Research for the open-soource library [Faiss](https://github.com/facebookresearch/faiss).
+We thank Facebook AI Research for the open-soource library [Faiss](https://github.com/facebookresearch/faiss). Also, our implementation largely borrows from [DeepCluster](https://github.com/facebookresearch/deepcluster) and [DeeperCluster](https://github.com/facebookresearch/DeeperCluster) for clustering with Faiss. 
 
 #### TODO's
 - [x] Dependency & dataset setup.
