@@ -36,7 +36,7 @@ def get_model_and_optimizer(args, logger):
             args.start_epoch = checkpoint['epoch']
 
             model.load_state_dict(checkpoint['state_dict'])
-            classifier.load_state_dict(checkpoint['classifier_state_dict'])
+            classifier.load_state_dict(checkpoint['classifier1_state_dict'])
             optimizer.load_state_dict(checkpoint['optimizer'])
             logger.info('Loaded checkpoint [epoch {}].'.format(args.start_epoch))
         else:
