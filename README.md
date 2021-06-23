@@ -77,7 +77,6 @@ We have pretrained PiCIE weights.
 |------|-----------|-------------------------------|--------------------------|
 |PiCIE |COCO       |[weight]()|[log](logs/picie.out)     |
 |PiCIE |Cityscapes |[weight]()|[log](logs/picie_city.out)|
-|------|-----------|----------|-------|
 |MDC   |COCO       |[weight]()|[log]()|
 |MDC   |Cityscapes |[weight]()|[log]()|
 
