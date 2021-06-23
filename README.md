@@ -5,7 +5,7 @@
 *[Kavita Bala](http://www.cs.cornell.edu/~kb/)*<sup>2</sup>,
 *[Bharath Hariharan](http://home.bharathh.info)*<sup>2</sup>
 
-<sup>1</sup> University of Texas at Austin, <sup>2</sup> Cornell University
+<sup>1</sup> The University of Texas at Austin, <sup>2</sup> Cornell University
 
 [[paper](https://openaccess.thecvf.com/content/CVPR2021/papers/Cho_PiCIE_Unsupervised_Semantic_Segmentation_Using_Invariance_and_Equivariance_in_Clustering_CVPR_2021_paper.pdf)] [[supp](https://openaccess.thecvf.com/content/CVPR2021/supplemental/Cho_PiCIE_Unsupervised_Semantic_CVPR_2021_supplemental.pdf)] [[project page](https://sites.google.com/view/picie-cvpr2021/home)]
 
