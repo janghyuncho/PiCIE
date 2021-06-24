@@ -75,10 +75,10 @@ nohup ./sh_files/test_picie.sh > logs/picie_test.out &
 We have pretrained PiCIE weights. 
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
-|PiCIE |COCO       |[weight]()|[log](logs/picie.out)     |
-|PiCIE |Cityscapes |[weight]()|[log](logs/picie_city.out)|
-|MDC   |COCO       |[weight]()|[log]()|
-|MDC   |Cityscapes |[weight]()|[log]()|
+|PiCIE |COCO       |weight|log  |
+|PiCIE |Cityscapes |weight|log |
+|MDC   |COCO       |weight|log |
+|MDC   |Cityscapes |weight|log |
 
 
 ## Visualization (To be updated soon)
