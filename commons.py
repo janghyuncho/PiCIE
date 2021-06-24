@@ -62,7 +62,7 @@ def run_mini_batch_kmeans(args, logger, dataloader, model, view, is_first=False)
     dataloader.dataset.view = view
 
     # Only first run use online batch stats.
-    model.train(mode=is_first) 
+    # model.train(mode=is_first) 
 
     with torch.no_grad():
         for i_batch, (indice, image) in enumerate(dataloader):

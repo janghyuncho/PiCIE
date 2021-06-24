@@ -184,7 +184,7 @@ def main(args, logger):
     testset    = EvalCOCO(args.data_root, res=args.res, split='val', mode='test', stuff=args.stuff, thing=args.thing)
     testloader = torch.utils.data.DataLoader(testset,
                                              batch_size=args.batch_size_test,
-                                             shuffle=False,
+                                             shuffle=True,
                                              num_workers=args.num_workers,
                                              pin_memory=True,
                                              collate_fn=collate_eval,

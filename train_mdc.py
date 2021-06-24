@@ -133,7 +133,7 @@ def main(args, logger):
                         scale=(args.min_scale, 1)) # NOTE: For now, max_scale = 1.  
     trainloader = torch.utils.data.DataLoader(trainset, 
                                                 batch_size=args.batch_size_cluster,
-                                                shuffle=True, 
+                                                shuffle=False, 
                                                 num_workers=args.num_workers,
                                                 pin_memory=True,
                                                 collate_fn=collate_train_baseline,
