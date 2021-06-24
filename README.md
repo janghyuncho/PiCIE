@@ -58,7 +58,7 @@ mv curated datasets/coco/
 ~~~
 This will setup the dataset that contains the same set of images with [IIC](https://github.com/xu-ji/IIC).
 
-## Running PiCIE (To be updated soon)
+## Running PiCIE 
 Below are training and testing commands to train PiCIE. 
 ### Training
 Below line will run the training code with default setting in the background. 
@@ -71,7 +71,7 @@ Below line will run the testing code with default setting in the background.
 nohup ./sh_files/test_picie.sh > logs/picie_test.out &
 ~~~
 
-## Pretrained Models
+## Pretrained Models (To be updated soon)
 We have pretrained PiCIE weights. 
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
@@ -81,7 +81,7 @@ We have pretrained PiCIE weights.
 |MDC   |Cityscapes |[weight]()|[log]()|
 
 
-## Visualization
+## Visualization (To be updated soon)
 We prepared [a jupyter notebook](visualize.ipynb) for visualization.
 
 
