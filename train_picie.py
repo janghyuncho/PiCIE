@@ -31,7 +31,7 @@ def parse_arguments():
     parser.add_argument('--res', type=int, default=320, help='Input size.')
     parser.add_argument('--res1', type=int, default=320, help='Input size scale from.')
     parser.add_argument('--res2', type=int, default=320, help='Input size scale to.')
-    parser.add_argument('--batch_size_cluster', type=int, default=128)
+    parser.add_argument('--batch_size_cluster', type=int, default=512)
     parser.add_argument('--batch_size_train', type=int, default=128)
     parser.add_argument('--batch_size_test', type=int, default=128)
     parser.add_argument('--lr', type=float, default=1e-3)
@@ -204,8 +204,8 @@ def main(args, logger):
         
         # Compute cluster assignment. 
         t2 = t.time()
-        weight1 = compute_labels(args, logger, trainloader, model, centroids1, view=1) 
-        weight2 = compute_labels(args, logger, trainloader, model, centroids2, view=2)
+        weight1 = compute_labels(args, logger, trainloader, model, centroids1, view=1, is_first=(epoch == args.start_epoch))
+        weight2 = compute_labels(args, logger, trainloader, model, centroids2, view=2, is_first=(epoch == args.start_epoch))
         logger.info('-Cluster labels ready. [{}]\n'.format(get_datetime(int(t.time())-int(t2)))) 
         
         # Criterion.

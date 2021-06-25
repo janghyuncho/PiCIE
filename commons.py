@@ -63,7 +63,7 @@ def run_mini_batch_kmeans(args, logger, dataloader, model, view, is_first=False)
 
     # Only first run use online batch stats.
     # model.train(mode=is_first) 
-
+    model.eval()
     with torch.no_grad():
         for i_batch, (indice, image) in enumerate(dataloader):
             # 1. Compute initial centroids from the first few batches. 
@@ -134,7 +134,7 @@ def run_mini_batch_kmeans(args, logger, dataloader, model, view, is_first=False)
 
 
 
-def compute_labels(args, logger, dataloader, model, centroids, view):
+def compute_labels(args, logger, dataloader, model, centroids, view, is_first=False):
     """
     Label all images for each view with the obtained cluster centroids. 
     The distance is efficiently computed by setting centroids as convolution layer. 

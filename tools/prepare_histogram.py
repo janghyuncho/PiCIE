@@ -54,7 +54,7 @@ if __name__ == '__main__':
     fix_seed_for_reproducability(args)
 
     # Init model. 
-    model = fpn.FPN(args)
+    model = fpn.PanopticFPN(args)
     model = nn.DataParallel(model)
     model = model.cuda()
 
@@ -74,6 +74,6 @@ if __name__ == '__main__':
     histogram_valid = compute_histogram(args, validloader, model, classifier)
 
     # Save the result. 
-    torch.save([histogram_train, histogram_valid], args.save_root + '/picie_histogram_coco.pkl')
+    torch.save([histogram_train, histogram_valid], args.save_root + '/histogram_coco.pkl')
     print('-Done.', flush=True)
 
