@@ -64,7 +64,11 @@ def parse_arguments():
     parser.add_argument('--v_flip', action='store_true', default=False)
     parser.add_argument('--random_crop', action='store_true', default=False)
     parser.add_argument('--val_type', type=str, default='val')
-
+    
+    # Eval-only
+    parser.add_argument('--eval_only', action='store_true', default=False)
+    parser.add_argument('--eval_path', type=str)
+    
     return parser.parse_args()
 
 
