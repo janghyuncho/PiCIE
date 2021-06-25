@@ -68,7 +68,7 @@ def parse_arguments():
     # Eval-only
     parser.add_argument('--eval_only', action='store_true', default=False)
     parser.add_argument('--eval_path', type=str)
-    
+
     return parser.parse_args()
 
 
@@ -202,7 +202,7 @@ def main(args, logger):
 
         logger.info('Start training ...')
         train_loss = train(args, logger, trainloader_loop, model, classifier, criterion, optimizer, optimizer_loop) 
-        acc, res   = evaluate(args, logger, testloader, classifier1, model)
+        acc, res   = evaluate(args, logger, testloader, classifier, model)
 
         logger.info('========== Epoch [{}] =========='.format(epoch))
         logger.info('  Time total : [{}].'.format(get_datetime(int(t.time())-int(t1))))
