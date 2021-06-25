@@ -8,11 +8,11 @@ KM_NUM=1
 KM_ITER=10
 SEED=2021
 
-mkdir -p results/mdc/${KM_INIT}_${KM_NUM}_${KM_ITER}_${SEED}/ 
+mkdir -p results/mdc/
 
 python train_mdc.py \
 --data_root datasets/coco/ \
---save_root results/mdc/${KM_INIT}_${KM_NUM}_${KM_ITER}_${SEED}/ \
+--save_root results/mdc/ \
 --pretrain \
 --repeats 1 \
 --seed ${SEED} \

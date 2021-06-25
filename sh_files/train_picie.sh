@@ -7,11 +7,11 @@ KM_NUM=1
 KM_ITER=10
 SEED=2021
 
-mkdir -p results/picie/${KM_INIT}_${KM_NUM}_${KM_ITER}_${SEED}/
+mkdir -p results/picie/
 
 python train_picie.py \
 --data_root datasets/coco/ \
---save_root results/picie/${KM_INIT}_${KM_NUM}_${KM_ITER}_${SEED}/ \
+--save_root results/picie/ \
 --pretrain \
 --repeats 1 \
 --seed ${SEED} \
