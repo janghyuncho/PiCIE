@@ -2,7 +2,6 @@ K_train=27
 K_test=27
 bsize=256
 num_epoch=10
-res=320
 KM_INIT=20
 KM_NUM=1
 KM_ITER=10
@@ -23,5 +22,5 @@ python train_picie.py \
 --stuff --thing  \
 --batch_size_cluster ${bsize} \
 --num_epoch ${num_epoch} \
---res ${res} --res1 320 --res2 640 \
+--res 320 --res1 320 --res2 640 \
 --augment --jitter --blur --grey --equiv --random_crop --h_flip 

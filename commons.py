@@ -28,25 +28,26 @@ def get_model_and_optimizer(args, logger):
 
     # optional restart. 
     args.start_epoch  = 0 
-    restart_path = os.path.join(args.save_model_path, 'checkpoint.pth.tar')
-    if args.restart: 
-        if os.path.isfile(restart_path):
-            logger.info('Restarting from checkpoint [{}].'.format(restart_path))
-            checkpoint  = torch.load(restart_path)
+    if args.restart or args.eval_only: 
+        load_path = os.path.join(args.save_model_path, 'checkpoint.pth.tar')
+        if args.eval_only:
+            load_path = args.eval_path
+        if os.path.isfile(load_path):
+            checkpoint  = torch.load(load_path)
             args.start_epoch = checkpoint['epoch']
 
             model.load_state_dict(checkpoint['state_dict'])
             classifier.load_state_dict(checkpoint['classifier1_state_dict'])
             optimizer.load_state_dict(checkpoint['optimizer'])
-            logger.info('Loaded checkpoint [epoch {}].'.format(args.start_epoch))
+            logger.info('Loaded checkpoint. [epoch {}]'.format(args.start_epoch))
         else:
-            logger.info('No checkpoint found at [{}].\nStart from beginning...\n'.format(restart_path))
+            logger.info('No checkpoint found at [{}].\nStart from beginning...\n'.format(load_path))
     
     return model, optimizer, classifier
 
 
 
-def run_mini_batch_kmeans(args, logger, dataloader, model, view, is_first=False):
+def run_mini_batch_kmeans(args, logger, dataloader, model, view):
     """
     num_init_batches: (int) The number of batches/iterations to accumulate before the initial k-means clustering.
     num_batches     : (int) The number of batches/iterations to accumulate before the next update. 
@@ -62,7 +63,6 @@ def run_mini_batch_kmeans(args, logger, dataloader, model, view, is_first=False)
     dataloader.dataset.view = view
 
     # Only first run use online batch stats.
-    # model.train(mode=is_first) 
     model.eval()
     with torch.no_grad():
         for i_batch, (indice, image) in enumerate(dataloader):
@@ -134,7 +134,7 @@ def run_mini_batch_kmeans(args, logger, dataloader, model, view, is_first=False)
 
 
 
-def compute_labels(args, logger, dataloader, model, centroids, view, is_first=False):
+def compute_labels(args, logger, dataloader, model, centroids, view):
     """
     Label all images for each view with the obtained cluster centroids. 
     The distance is efficiently computed by setting centroids as convolution layer. 

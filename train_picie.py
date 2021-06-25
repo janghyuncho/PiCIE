@@ -66,6 +66,10 @@ def parse_arguments():
     parser.add_argument('--random_crop', action='store_true', default=False)
     parser.add_argument('--val_type', type=str, default='train')
 
+    # Eval-only
+    parser.add_argument('--eval_only', action='store_true', default=False)
+    parser.add_argument('--eval_path', type=str)
+
     return parser.parse_args()
 
 
@@ -198,14 +202,14 @@ def main(args, logger):
         logger.info('\n============================= [Epoch {}] =============================\n'.format(epoch))
         logger.info('Start computing centroids.')
         t1 = t.time()
-        centroids1, kmloss1 = run_mini_batch_kmeans(args, logger, trainloader, model, view=1, is_first=(epoch == args.start_epoch))
-        centroids2, kmloss2 = run_mini_batch_kmeans(args, logger, trainloader, model, view=2, is_first=(epoch == args.start_epoch))
+        centroids1, kmloss1 = run_mini_batch_kmeans(args, logger, trainloader, model, view=1)
+        centroids2, kmloss2 = run_mini_batch_kmeans(args, logger, trainloader, model, view=2)
         logger.info('-Centroids ready. [Loss: {:.5f}| {:.5f}/ Time: {}]\n'.format(kmloss1, kmloss2, get_datetime(int(t.time())-int(t1))))
         
         # Compute cluster assignment. 
         t2 = t.time()
-        weight1 = compute_labels(args, logger, trainloader, model, centroids1, view=1, is_first=(epoch == args.start_epoch))
-        weight2 = compute_labels(args, logger, trainloader, model, centroids2, view=2, is_first=(epoch == args.start_epoch))
+        weight1 = compute_labels(args, logger, trainloader, model, centroids1, view=1)
+        weight2 = compute_labels(args, logger, trainloader, model, centroids2, view=2)
         logger.info('-Cluster labels ready. [{}]\n'.format(get_datetime(int(t.time())-int(t2)))) 
         
         # Criterion.
