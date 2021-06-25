@@ -5,7 +5,7 @@ num_epoch=10
 KM_INIT=20
 KM_NUM=1
 KM_ITER=10
-SEED=3333
+SEED=2021
 
 mkdir -p results/picie/${KM_INIT}_${KM_NUM}_${KM_ITER}_${SEED}/
 
