@@ -41,7 +41,6 @@ class TrainCOCO(data.Dataset):
     
 
     def __getitem__(self, index):
-        # index = self.shuffled_indices[index]
         imgid = self.imdb[index]
         image = self.load_data(imgid)
 
@@ -66,8 +65,6 @@ class TrainCOCO(data.Dataset):
         This is to use random sampling but have the same samples during clustering and 
         training within the same epoch. 
         """
-        # self.shuffled_indices = np.arange(len(self.imdb))
-        # np.random.shuffle(self.shuffled_indices)
         self.init_transforms()
 
 
