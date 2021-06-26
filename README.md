@@ -56,7 +56,7 @@ Finally, move *curated* folder to *datasets/coco/*:
 ~~~
 mv curated datasets/coco/
 ~~~
-This will setup the dataset that contains the same set of images with [IIC](https://github.com/xu-ji/IIC/blob/master/code/datasets/segmentation/cocostuff.py).
+This will setup the dataset that contains the same set of images with [IIC](https://github.com/xu-ji/IIC/blob/master/code/datasets/segmentation/cocostuff.py) ([config](https://github.com/xu-ji/IIC/blob/master/examples/commands.txt)).
 
 ## Running PiCIE 
 Below are training and testing commands to train PiCIE. 
