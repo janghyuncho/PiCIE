@@ -28,7 +28,7 @@ conda env create -f env.yml
 ~~~
 
 ### Preparing Dataset 
-Please download the [trainset](http://images.cocodataset.org/zips/train2017.zip) and the [validset](http://images.cocodataset.org/zips/val2017.zip) of COCO dataset as well as the [annotations](http://images.cocodataset.org/annotations/annotations_trainval2017.zip). Place the dataset as following:
+Please download the [trainset](http://images.cocodataset.org/zips/train2017.zip) and the [validset](http://images.cocodataset.org/zips/val2017.zip) of COCO dataset as well as the [annotations](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/stuffthingmaps_trainval2017.zip) and the [json files](http://images.cocodataset.org/annotations/annotations_trainval2017.zip). Place the dataset as following:
 ~~~
 /your/dataset/directory/
       └── coco/
@@ -40,6 +40,12 @@ Please download the [trainset](http://images.cocodataset.org/zips/train2017.zip)
             │             ├── xxxxxxxxx.jpg
             │             └── ...
             └── annotations/
+                  ├── train2017/
+                  │       ├── xxxxxxxxx.png
+                  │       └── ...
+                  ├── val2017/
+                  │       ├── xxxxxxxxx.png
+                  │       └── ...
                   ├── COCO_2017_train.json
                   └── COCO_2017_val.json
 ~~~
