@@ -12,7 +12,7 @@ from data.custom_transforms import *
 
 class TrainCOCO(data.Dataset):
     def __init__(self, root, labeldir, mode, split='train', res1=320, res2=640, inv_list=[], eqv_list=[], \
-                 stuff=True, thing=False, scale=(0.5, 1)):
+                 stuff=True, thing=False, scale=(0.5, 1), version=7, fullcoco=False):
         self.root  = root 
         self.split = split
         self.res1  = res1
@@ -20,27 +20,35 @@ class TrainCOCO(data.Dataset):
         self.stuff = stuff 
         self.thing = thing 
         self.mode  = mode
-        self.imdb  = self.load_imdb()
         self.scale = scale 
         self.view  = -1
 
         self.inv_list = inv_list
         self.eqv_list = eqv_list
         self.labeldir = labeldir
+
+        self.version  = version  # 7 is what we used. 
+        self.fullcoco = fullcoco # To use full set of images in COCO.
         
+        self.imdb = self.load_imdb()
         self.reshuffle() 
 
     def load_imdb(self):
-        # 1. Setup filelist. 
-        # TODO explain why we do this. 
-        imdb = os.path.join(self.root, 'curated', '{}2017'.format(self.split), 'Coco164kFull_Stuff_Coarse_7.txt')
-        imdb = tuple(open(imdb, "r"))
-        imdb = [id_.rstrip() for id_ in imdb]
-        
+        if self.fullcoco:
+            imdb = [x[:-4] for x in os.listdir(os.path.join(self.root, '{}2017'.format(self.split)))]
+        else:
+            # Setup filelist for the main benchmark. (This will have the same set of images as IIC.)
+            # https://github.com/xu-ji/IIC/blob/master/code/datasets/segmentation/cocostuff.py
+            # https://github.com/xu-ji/IIC/blob/master/examples/commands.txt (version 7 was used here).
+            imdb = os.path.join(self.root, 'curated', '{}2017'.format(self.split), 'Coco164kFull_Stuff_Coarse_{}.txt'.format(self.version))
+            imdb = tuple(open(imdb, "r"))
+            imdb = [id_.rstrip() for id_ in imdb]
+            
         return imdb
     
 
     def __getitem__(self, index):
+        index = self.shuffled_indices[index]
         imgid = self.imdb[index]
         image = self.load_data(imgid)
 
@@ -65,6 +73,8 @@ class TrainCOCO(data.Dataset):
         This is to use random sampling but have the same samples during clustering and 
         training within the same epoch. 
         """
+        self.shuffled_indices = np.arange(len(self.imdb))
+        np.random.shuffle(self.shuffled_indices)
         self.init_transforms()
 
 
@@ -154,7 +164,7 @@ class TrainCOCO(data.Dataset):
 
         # Tensor transform. 
         self.transform_tensor = TensorTransform()
-        
+    
 
     def transform_label(self, index):
         # TODO Equiv. transform.
