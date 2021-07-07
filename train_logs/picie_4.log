@@ -1,0 +1,749 @@
+2021-07-05 16:49:33,918:INFO: Namespace(K_test=27, K_train=27, arch='resnet18', augment=True, batch_size_cluster=256, batch_size_test=128, batch_size_train=128, blur=True, comment='', data_root='datasets/coco/', equiv=True, eval_only=False, eval_path=None, grey=True, h_flip=True, in_dim=128, jitter=True, kmeans_n_iter=20, lr=0.0001, metric_test='cosine', metric_train='cosine', min_scale=0.5, momentum=0.9, mse=False, no_balance=False, num_batches=1, num_epoch=10, num_init_batches=20, num_workers=4, optim_type='Adam', pretrain=True, random_crop=True, repeats=1, res=320, res1=320, res2=640, restart=False, restart_path=None, save_eval_path='results/picie/train/4/augmented/res1=320_res2=640/jitter=True_blur=True_grey=True/equiv/h_flip=True_v_flip=False_crop=True/min_scale\\=0.5/K_train=27_cosine/K_test=27_cosine', save_model_path='results/picie/train/4/augmented/res1=320_res2=640/jitter=True_blur=True_grey=True/equiv/h_flip=True_v_flip=False_crop=True/min_scale\\=0.5/K_train=27_cosine', save_root='results/picie/train/4/augmented/res1=320_res2=640/jitter=True_blur=True_grey=True/equiv/h_flip=True_v_flip=False_crop=True/min_scale\\=0.5', seed=4, stuff=True, thing=True, v_flip=False, val_type='train', weight_decay=0.0005)
+2021-07-05 16:49:39,116:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 16:49:45,058:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 16:49:45,058:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 16:49:45,058:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 16:49:45,440:INFO: 0/17
+2021-07-05 16:50:01,911:INFO: ACC  - All  : 15.5577
+2021-07-05 16:50:01,911:INFO: mIOU - All  : 3.1978
+2021-07-05 16:50:01,911:INFO: ACC  - Thing: 56.3876
+2021-07-05 16:50:01,912:INFO: mIOU - Thing: 10.5149
+2021-07-05 16:50:01,912:INFO: ACC  - Stuff: 20.6053
+2021-07-05 16:50:01,912:INFO: mIOU - Stuff: 5.7906
+2021-07-05 16:50:02,419:INFO: 
+============================= [Epoch 0] =============================
+
+2021-07-05 16:50:02,419:INFO: Start computing centroids.
+2021-07-05 16:50:26,116:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 16:50:26,117:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 16:50:26,981:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 16:54:00,483:INFO: Initial k-means loss: 0.4556 
+2021-07-05 16:59:57,108:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.4560
+2021-07-05 17:07:21,701:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 17:07:21,702:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 17:07:22,291:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 17:10:54,445:INFO: Initial k-means loss: 0.4397 
+2021-07-05 17:16:13,699:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.4411
+2021-07-05 17:22:25,575:INFO: -Centroids ready. [Loss: 0.45573| 0.44063/ Time: 0:0:32:23]
+
+2021-07-05 17:22:45,677:INFO: Centroid size      : [27, 128]
+2021-07-05 17:22:45,678:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 17:22:45,678:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 17:22:46,375:INFO: [Assigning labels] 0 / 194
+2021-07-05 17:37:47,686:INFO: Centroid size      : [27, 128]
+2021-07-05 17:37:47,687:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 17:37:47,687:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 17:37:48,344:INFO: [Assigning labels] 0 / 194
+2021-07-05 17:51:03,176:INFO: -Cluster labels ready. [0:0:28:38]
+
+2021-07-05 17:51:03,179:INFO: Start training ...
+2021-07-05 17:51:20,735:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 17:51:20,736:INFO: Batch label size   : [128, 80, 80]
+2021-07-05 17:51:20,736:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 17:51:21,472:INFO: 0 / 388	
+2021-07-05 18:04:25,878:INFO: 200 / 388	
+2021-07-05 18:16:29,205:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 18:16:34,563:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 18:16:34,564:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 18:16:34,564:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 18:16:34,916:INFO: 0/17
+2021-07-05 18:16:53,377:INFO: ACC  - All  : 34.0793
+2021-07-05 18:16:53,377:INFO: mIOU - All  : 13.0644
+2021-07-05 18:16:53,378:INFO: ACC  - Thing: 70.0570
+2021-07-05 18:16:53,378:INFO: mIOU - Thing: 32.6179
+2021-07-05 18:16:53,378:INFO: ACC  - Stuff: 45.8772
+2021-07-05 18:16:53,378:INFO: mIOU - Stuff: 18.3738
+2021-07-05 18:16:53,384:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 18:16:58,406:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 18:16:58,407:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 18:16:58,407:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 18:16:58,766:INFO: 0/17
+2021-07-05 18:17:16,774:INFO: ACC  - All  : 36.6218
+2021-07-05 18:17:16,774:INFO: mIOU - All  : 14.0498
+2021-07-05 18:17:16,775:INFO: ACC  - Thing: 55.9815
+2021-07-05 18:17:16,775:INFO: mIOU - Thing: 31.1310
+2021-07-05 18:17:16,775:INFO: ACC  - Stuff: 50.8147
+2021-07-05 18:17:16,775:INFO: mIOU - Stuff: 19.2034
+2021-07-05 18:17:16,780:INFO: ============== Epoch [0] ==============
+2021-07-05 18:17:16,780:INFO:   Time: [0:1:27:14]
+2021-07-05 18:17:16,780:INFO:   K-Means loss   : 0.45573 | 0.44063
+2021-07-05 18:17:16,780:INFO:   Training Total Loss  : 3.06576
+2021-07-05 18:17:16,780:INFO:   Training CE Loss (Total | Within | Across) : 3.06576 | 3.05524 | 3.07627
+2021-07-05 18:17:16,780:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-05 18:17:16,780:INFO:   [View 1] ACC: 34.0793 | mIoU: 13.0644
+2021-07-05 18:17:16,780:INFO:   [View 2] ACC: 36.6218 | mIoU: 14.0498
+2021-07-05 18:17:16,780:INFO: ========================================
+
+2021-07-05 18:17:17,894:INFO: 
+============================= [Epoch 1] =============================
+
+2021-07-05 18:17:17,894:INFO: Start computing centroids.
+2021-07-05 18:17:38,188:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 18:17:38,189:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 18:17:38,975:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 18:21:17,559:INFO: Initial k-means loss: 0.2157 
+2021-07-05 18:27:27,503:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.2147
+2021-07-05 18:34:59,114:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 18:34:59,115:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 18:34:59,728:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 18:38:37,896:INFO: Initial k-means loss: 0.2001 
+2021-07-05 18:43:56,817:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.1995
+2021-07-05 18:50:02,767:INFO: -Centroids ready. [Loss: 0.21412| 0.19894/ Time: 0:0:32:45]
+
+2021-07-05 18:50:21,652:INFO: Centroid size      : [27, 128]
+2021-07-05 18:50:21,657:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 18:50:21,657:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 18:50:22,479:INFO: [Assigning labels] 0 / 194
+2021-07-05 19:05:24,290:INFO: Centroid size      : [27, 128]
+2021-07-05 19:05:24,291:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 19:05:24,291:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 19:05:24,725:INFO: [Assigning labels] 0 / 194
+2021-07-05 19:18:07,045:INFO: -Cluster labels ready. [0:0:28:5]
+
+2021-07-05 19:18:07,047:INFO: Start training ...
+2021-07-05 19:18:23,812:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 19:18:23,813:INFO: Batch label size   : [128, 80, 80]
+2021-07-05 19:18:23,813:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 19:18:24,495:INFO: 0 / 388	
+2021-07-05 19:31:14,979:INFO: 200 / 388	
+2021-07-05 19:43:15,986:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 19:43:21,388:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 19:43:21,389:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 19:43:21,389:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 19:43:21,775:INFO: 0/17
+2021-07-05 19:43:40,928:INFO: ACC  - All  : 37.3906
+2021-07-05 19:43:40,928:INFO: mIOU - All  : 13.9325
+2021-07-05 19:43:40,929:INFO: ACC  - Thing: 48.8831
+2021-07-05 19:43:40,929:INFO: mIOU - Thing: 27.3995
+2021-07-05 19:43:40,929:INFO: ACC  - Stuff: 60.1853
+2021-07-05 19:43:40,929:INFO: mIOU - Stuff: 19.1912
+2021-07-05 19:43:40,937:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 19:43:45,753:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 19:43:45,754:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 19:43:45,755:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 19:43:46,154:INFO: 0/17
+2021-07-05 19:44:04,263:INFO: ACC  - All  : 37.9983
+2021-07-05 19:44:04,263:INFO: mIOU - All  : 13.8509
+2021-07-05 19:44:04,264:INFO: ACC  - Thing: 59.4405
+2021-07-05 19:44:04,264:INFO: mIOU - Thing: 25.6961
+2021-07-05 19:44:04,264:INFO: ACC  - Stuff: 51.3978
+2021-07-05 19:44:04,264:INFO: mIOU - Stuff: 21.1848
+2021-07-05 19:44:04,269:INFO: ============== Epoch [1] ==============
+2021-07-05 19:44:04,269:INFO:   Time: [0:1:26:47]
+2021-07-05 19:44:04,270:INFO:   K-Means loss   : 0.21412 | 0.19894
+2021-07-05 19:44:04,270:INFO:   Training Total Loss  : 2.58161
+2021-07-05 19:44:04,270:INFO:   Training CE Loss (Total | Within | Across) : 2.58161 | 2.55437 | 2.60885
+2021-07-05 19:44:04,270:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-05 19:44:04,270:INFO:   [View 1] ACC: 37.3906 | mIoU: 13.9325
+2021-07-05 19:44:04,270:INFO:   [View 2] ACC: 37.9983 | mIoU: 13.8509
+2021-07-05 19:44:04,270:INFO: ========================================
+
+2021-07-05 19:44:05,219:INFO: 
+============================= [Epoch 2] =============================
+
+2021-07-05 19:44:05,220:INFO: Start computing centroids.
+2021-07-05 19:44:25,066:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 19:44:25,067:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 19:44:25,932:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 19:48:14,746:INFO: Initial k-means loss: 0.1245 
+2021-07-05 19:54:19,689:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.1248
+2021-07-05 20:01:57,000:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 20:01:57,001:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 20:01:57,667:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 20:05:52,031:INFO: Initial k-means loss: 0.1334 
+2021-07-05 20:11:14,729:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.1343
+2021-07-05 20:17:36,394:INFO: -Centroids ready. [Loss: 0.12469| 0.13402/ Time: 0:0:33:31]
+
+2021-07-05 20:17:55,678:INFO: Centroid size      : [27, 128]
+2021-07-05 20:17:55,679:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 20:17:55,679:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 20:17:56,707:INFO: [Assigning labels] 0 / 194
+2021-07-05 20:34:05,227:INFO: Centroid size      : [27, 128]
+2021-07-05 20:34:05,227:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 20:34:05,227:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 20:34:06,138:INFO: [Assigning labels] 0 / 194
+2021-07-05 20:47:30,049:INFO: -Cluster labels ready. [0:0:29:54]
+
+2021-07-05 20:47:30,051:INFO: Start training ...
+2021-07-05 20:47:47,251:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 20:47:47,252:INFO: Batch label size   : [128, 80, 80]
+2021-07-05 20:47:47,252:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 20:47:47,933:INFO: 0 / 388	
+2021-07-05 21:01:26,769:INFO: 200 / 388	
+2021-07-05 21:14:03,707:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 21:14:08,755:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 21:14:08,755:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 21:14:08,755:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 21:14:09,146:INFO: 0/17
+2021-07-05 21:14:29,196:INFO: ACC  - All  : 39.3312
+2021-07-05 21:14:29,196:INFO: mIOU - All  : 13.5942
+2021-07-05 21:14:29,196:INFO: ACC  - Thing: 60.7125
+2021-07-05 21:14:29,196:INFO: mIOU - Thing: 22.8526
+2021-07-05 21:14:29,197:INFO: ACC  - Stuff: 58.0064
+2021-07-05 21:14:29,197:INFO: mIOU - Stuff: 22.8431
+2021-07-05 21:14:29,205:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 21:14:34,147:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 21:14:34,148:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 21:14:34,148:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 21:14:34,864:INFO: 0/17
+2021-07-05 21:14:54,332:INFO: ACC  - All  : 40.4707
+2021-07-05 21:14:54,332:INFO: mIOU - All  : 13.9067
+2021-07-05 21:14:54,332:INFO: ACC  - Thing: 65.1262
+2021-07-05 21:14:54,332:INFO: mIOU - Thing: 33.4527
+2021-07-05 21:14:54,333:INFO: ACC  - Stuff: 54.2676
+2021-07-05 21:14:54,333:INFO: mIOU - Stuff: 16.0334
+2021-07-05 21:14:54,341:INFO: ============== Epoch [2] ==============
+2021-07-05 21:14:54,341:INFO:   Time: [0:1:30:49]
+2021-07-05 21:14:54,341:INFO:   K-Means loss   : 0.12469 | 0.13402
+2021-07-05 21:14:54,341:INFO:   Training Total Loss  : 2.51988
+2021-07-05 21:14:54,341:INFO:   Training CE Loss (Total | Within | Across) : 2.51988 | 2.49677 | 2.54299
+2021-07-05 21:14:54,341:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-05 21:14:54,341:INFO:   [View 1] ACC: 39.3312 | mIoU: 13.5942
+2021-07-05 21:14:54,341:INFO:   [View 2] ACC: 40.4707 | mIoU: 13.9067
+2021-07-05 21:14:54,341:INFO: ========================================
+
+2021-07-05 21:14:55,340:INFO: 
+============================= [Epoch 3] =============================
+
+2021-07-05 21:14:55,340:INFO: Start computing centroids.
+2021-07-05 21:15:16,922:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 21:15:16,923:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 21:15:17,738:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 21:19:20,734:INFO: Initial k-means loss: 0.0882 
+2021-07-05 21:25:40,554:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0890
+2021-07-05 21:33:22,277:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 21:33:22,278:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 21:33:22,984:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 21:37:00,956:INFO: Initial k-means loss: 0.0820 
+2021-07-05 21:41:58,793:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0825
+2021-07-05 21:47:48,928:INFO: -Centroids ready. [Loss: 0.08896| 0.08246/ Time: 0:0:32:53]
+
+2021-07-05 21:48:07,144:INFO: Centroid size      : [27, 128]
+2021-07-05 21:48:07,144:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 21:48:07,144:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 21:48:07,852:INFO: [Assigning labels] 0 / 194
+2021-07-05 22:01:52,528:INFO: Centroid size      : [27, 128]
+2021-07-05 22:01:52,528:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 22:01:52,528:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 22:01:52,979:INFO: [Assigning labels] 0 / 194
+2021-07-05 22:13:28,846:INFO: -Cluster labels ready. [0:0:25:40]
+
+2021-07-05 22:13:28,847:INFO: Start training ...
+2021-07-05 22:13:43,964:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 22:13:43,965:INFO: Batch label size   : [128, 80, 80]
+2021-07-05 22:13:43,965:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 22:13:44,646:INFO: 0 / 388	
+2021-07-05 22:25:33,765:INFO: 200 / 388	
+2021-07-05 22:36:37,234:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 22:36:41,790:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 22:36:41,791:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 22:36:41,791:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 22:36:42,157:INFO: 0/17
+2021-07-05 22:36:58,994:INFO: ACC  - All  : 40.9166
+2021-07-05 22:36:58,995:INFO: mIOU - All  : 13.5012
+2021-07-05 22:36:58,995:INFO: ACC  - Thing: 59.9837
+2021-07-05 22:36:58,995:INFO: mIOU - Thing: 34.1084
+2021-07-05 22:36:58,995:INFO: ACC  - Stuff: 66.5515
+2021-07-05 22:36:58,995:INFO: mIOU - Stuff: 14.3578
+2021-07-05 22:36:59,001:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 22:37:03,800:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 22:37:03,801:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 22:37:03,801:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 22:37:04,146:INFO: 0/17
+2021-07-05 22:37:20,862:INFO: ACC  - All  : 40.3240
+2021-07-05 22:37:20,863:INFO: mIOU - All  : 13.5350
+2021-07-05 22:37:20,863:INFO: ACC  - Thing: 51.7693
+2021-07-05 22:37:20,863:INFO: mIOU - Thing: 24.2503
+2021-07-05 22:37:20,863:INFO: ACC  - Stuff: 68.0935
+2021-07-05 22:37:20,863:INFO: mIOU - Stuff: 21.3313
+2021-07-05 22:37:20,869:INFO: ============== Epoch [3] ==============
+2021-07-05 22:37:20,869:INFO:   Time: [0:1:22:25]
+2021-07-05 22:37:20,869:INFO:   K-Means loss   : 0.08896 | 0.08246
+2021-07-05 22:37:20,869:INFO:   Training Total Loss  : 2.48522
+2021-07-05 22:37:20,869:INFO:   Training CE Loss (Total | Within | Across) : 2.48522 | 2.46304 | 2.50740
+2021-07-05 22:37:20,869:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-05 22:37:20,869:INFO:   [View 1] ACC: 40.9166 | mIoU: 13.5012
+2021-07-05 22:37:20,869:INFO:   [View 2] ACC: 40.3240 | mIoU: 13.5350
+2021-07-05 22:37:20,869:INFO: ========================================
+
+2021-07-05 22:37:21,762:INFO: 
+============================= [Epoch 4] =============================
+
+2021-07-05 22:37:21,762:INFO: Start computing centroids.
+2021-07-05 22:37:39,821:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 22:37:39,822:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 22:37:40,608:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 22:41:04,714:INFO: Initial k-means loss: 0.0715 
+2021-07-05 22:46:39,454:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0716
+2021-07-05 22:53:26,817:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 22:53:26,818:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 22:53:27,364:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-05 22:57:02,768:INFO: Initial k-means loss: 0.0854 
+2021-07-05 23:01:49,786:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0857
+2021-07-05 23:07:30,429:INFO: -Centroids ready. [Loss: 0.07165| 0.08532/ Time: 0:0:30:9]
+
+2021-07-05 23:07:48,379:INFO: Centroid size      : [27, 128]
+2021-07-05 23:07:48,379:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 23:07:48,379:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 23:07:49,051:INFO: [Assigning labels] 0 / 194
+2021-07-05 23:21:37,198:INFO: Centroid size      : [27, 128]
+2021-07-05 23:21:37,199:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-05 23:21:37,199:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-05 23:21:37,625:INFO: [Assigning labels] 0 / 194
+2021-07-05 23:33:17,335:INFO: -Cluster labels ready. [0:0:25:47]
+
+2021-07-05 23:33:17,337:INFO: Start training ...
+2021-07-05 23:33:32,800:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 23:33:32,801:INFO: Batch label size   : [128, 80, 80]
+2021-07-05 23:33:32,801:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 23:33:33,480:INFO: 0 / 388	
+2021-07-05 23:45:17,346:INFO: 200 / 388	
+2021-07-05 23:56:16,614:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 23:56:21,028:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 23:56:21,029:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 23:56:21,029:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 23:56:21,393:INFO: 0/17
+2021-07-05 23:56:38,501:INFO: ACC  - All  : 41.9590
+2021-07-05 23:56:38,501:INFO: mIOU - All  : 13.4781
+2021-07-05 23:56:38,501:INFO: ACC  - Thing: 58.5743
+2021-07-05 23:56:38,501:INFO: mIOU - Thing: 23.3732
+2021-07-05 23:56:38,502:INFO: ACC  - Stuff: 51.9561
+2021-07-05 23:56:38,502:INFO: mIOU - Stuff: 17.0376
+2021-07-05 23:56:38,508:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-05 23:56:43,404:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-05 23:56:43,404:INFO: Batch label size   : [128, 320, 320]
+2021-07-05 23:56:43,404:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-05 23:56:43,749:INFO: 0/17
+2021-07-05 23:56:59,753:INFO: ACC  - All  : 41.5269
+2021-07-05 23:56:59,754:INFO: mIOU - All  : 13.6623
+2021-07-05 23:56:59,754:INFO: ACC  - Thing: 56.7396
+2021-07-05 23:56:59,754:INFO: mIOU - Thing: 24.5930
+2021-07-05 23:56:59,754:INFO: ACC  - Stuff: 56.9863
+2021-07-05 23:56:59,754:INFO: mIOU - Stuff: 17.1108
+2021-07-05 23:56:59,760:INFO: ============== Epoch [4] ==============
+2021-07-05 23:56:59,760:INFO:   Time: [0:1:19:38]
+2021-07-05 23:56:59,760:INFO:   K-Means loss   : 0.07165 | 0.08532
+2021-07-05 23:56:59,760:INFO:   Training Total Loss  : 2.46351
+2021-07-05 23:56:59,760:INFO:   Training CE Loss (Total | Within | Across) : 2.46351 | 2.44284 | 2.48419
+2021-07-05 23:56:59,761:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-05 23:56:59,761:INFO:   [View 1] ACC: 41.9590 | mIoU: 13.4781
+2021-07-05 23:56:59,761:INFO:   [View 2] ACC: 41.5269 | mIoU: 13.6623
+2021-07-05 23:56:59,761:INFO: ========================================
+
+2021-07-05 23:57:00,676:INFO: 
+============================= [Epoch 5] =============================
+
+2021-07-05 23:57:00,676:INFO: Start computing centroids.
+2021-07-05 23:57:19,334:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-05 23:57:19,335:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-05 23:57:20,121:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 00:00:33,384:INFO: Initial k-means loss: 0.0751 
+2021-07-06 00:06:11,690:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0745
+2021-07-06 00:13:01,110:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 00:13:01,111:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 00:13:01,698:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 00:16:18,234:INFO: Initial k-means loss: 0.0600 
+2021-07-06 00:21:06,044:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0604
+2021-07-06 00:27:12,980:INFO: -Centroids ready. [Loss: 0.07438| 0.06030/ Time: 0:0:30:12]
+
+2021-07-06 00:27:33,002:INFO: Centroid size      : [27, 128]
+2021-07-06 00:27:33,002:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 00:27:33,002:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 00:27:33,715:INFO: [Assigning labels] 0 / 194
+2021-07-06 00:42:45,433:INFO: Centroid size      : [27, 128]
+2021-07-06 00:42:45,434:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 00:42:45,434:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 00:42:45,898:INFO: [Assigning labels] 0 / 194
+2021-07-06 00:55:44,169:INFO: -Cluster labels ready. [0:0:28:32]
+
+2021-07-06 00:55:44,171:INFO: Start training ...
+2021-07-06 00:56:01,121:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 00:56:01,125:INFO: Batch label size   : [128, 80, 80]
+2021-07-06 00:56:01,126:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 00:56:01,996:INFO: 0 / 388	
+2021-07-06 01:09:19,896:INFO: 200 / 388	
+2021-07-06 01:21:19,774:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 01:21:24,851:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 01:21:24,852:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 01:21:24,852:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 01:21:25,424:INFO: 0/17
+2021-07-06 01:21:44,263:INFO: ACC  - All  : 42.3634
+2021-07-06 01:21:44,263:INFO: mIOU - All  : 12.6678
+2021-07-06 01:21:44,264:INFO: ACC  - Thing: 75.7933
+2021-07-06 01:21:44,264:INFO: mIOU - Thing: 26.9638
+2021-07-06 01:21:44,264:INFO: ACC  - Stuff: 47.8486
+2021-07-06 01:21:44,264:INFO: mIOU - Stuff: 16.4708
+2021-07-06 01:21:44,270:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 01:21:49,796:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 01:21:49,803:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 01:21:49,803:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 01:21:50,310:INFO: 0/17
+2021-07-06 01:22:08,688:INFO: ACC  - All  : 42.8883
+2021-07-06 01:22:08,688:INFO: mIOU - All  : 12.9744
+2021-07-06 01:22:08,688:INFO: ACC  - Thing: 71.5972
+2021-07-06 01:22:08,688:INFO: mIOU - Thing: 27.5491
+2021-07-06 01:22:08,688:INFO: ACC  - Stuff: 54.4824
+2021-07-06 01:22:08,688:INFO: mIOU - Stuff: 18.0201
+2021-07-06 01:22:08,694:INFO: ============== Epoch [5] ==============
+2021-07-06 01:22:08,694:INFO:   Time: [0:1:25:8]
+2021-07-06 01:22:08,694:INFO:   K-Means loss   : 0.07438 | 0.06030
+2021-07-06 01:22:08,694:INFO:   Training Total Loss  : 2.47457
+2021-07-06 01:22:08,694:INFO:   Training CE Loss (Total | Within | Across) : 2.47457 | 2.45498 | 2.49417
+2021-07-06 01:22:08,694:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-06 01:22:08,694:INFO:   [View 1] ACC: 42.3634 | mIoU: 12.6678
+2021-07-06 01:22:08,695:INFO:   [View 2] ACC: 42.8883 | mIoU: 12.9744
+2021-07-06 01:22:08,695:INFO: ========================================
+
+2021-07-06 01:22:09,728:INFO: 
+============================= [Epoch 6] =============================
+
+2021-07-06 01:22:09,728:INFO: Start computing centroids.
+2021-07-06 01:22:30,252:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 01:22:30,255:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 01:22:31,061:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 01:26:22,130:INFO: Initial k-means loss: 0.0586 
+2021-07-06 01:32:29,420:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0585
+2021-07-06 01:39:59,580:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 01:39:59,580:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 01:40:00,199:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 01:43:27,960:INFO: Initial k-means loss: 0.0563 
+2021-07-06 01:48:51,240:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0559
+2021-07-06 01:55:17,174:INFO: -Centroids ready. [Loss: 0.05849| 0.05584/ Time: 0:0:33:8]
+
+2021-07-06 01:55:38,845:INFO: Centroid size      : [27, 128]
+2021-07-06 01:55:38,846:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 01:55:38,846:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 01:55:39,574:INFO: [Assigning labels] 0 / 194
+2021-07-06 02:11:27,620:INFO: Centroid size      : [27, 128]
+2021-07-06 02:11:27,621:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 02:11:27,621:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 02:11:28,569:INFO: [Assigning labels] 0 / 194
+2021-07-06 02:24:52,152:INFO: -Cluster labels ready. [0:0:29:35]
+
+2021-07-06 02:24:52,154:INFO: Start training ...
+2021-07-06 02:25:09,812:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 02:25:09,813:INFO: Batch label size   : [128, 80, 80]
+2021-07-06 02:25:09,813:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 02:25:10,531:INFO: 0 / 388	
+2021-07-06 02:38:50,884:INFO: 200 / 388	
+2021-07-06 02:52:00,333:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 02:52:05,394:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 02:52:05,395:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 02:52:05,395:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 02:52:05,742:INFO: 0/17
+2021-07-06 02:52:25,497:INFO: ACC  - All  : 42.6105
+2021-07-06 02:52:25,498:INFO: mIOU - All  : 12.2840
+2021-07-06 02:52:25,498:INFO: ACC  - Thing: 52.9089
+2021-07-06 02:52:25,498:INFO: mIOU - Thing: 13.2414
+2021-07-06 02:52:25,498:INFO: ACC  - Stuff: 59.3987
+2021-07-06 02:52:25,498:INFO: mIOU - Stuff: 24.7235
+2021-07-06 02:52:25,504:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 02:52:31,387:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 02:52:31,389:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 02:52:31,389:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 02:52:31,748:INFO: 0/17
+2021-07-06 02:52:49,871:INFO: ACC  - All  : 42.4923
+2021-07-06 02:52:49,871:INFO: mIOU - All  : 11.7085
+2021-07-06 02:52:49,871:INFO: ACC  - Thing: 65.9563
+2021-07-06 02:52:49,872:INFO: mIOU - Thing: 26.0824
+2021-07-06 02:52:49,872:INFO: ACC  - Stuff: 58.9322
+2021-07-06 02:52:49,872:INFO: mIOU - Stuff: 15.9910
+2021-07-06 02:52:49,878:INFO: ============== Epoch [6] ==============
+2021-07-06 02:52:49,878:INFO:   Time: [0:1:30:40]
+2021-07-06 02:52:49,878:INFO:   K-Means loss   : 0.05849 | 0.05584
+2021-07-06 02:52:49,878:INFO:   Training Total Loss  : 2.46832
+2021-07-06 02:52:49,878:INFO:   Training CE Loss (Total | Within | Across) : 2.46832 | 2.44901 | 2.48763
+2021-07-06 02:52:49,878:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-06 02:52:49,878:INFO:   [View 1] ACC: 42.6105 | mIoU: 12.2840
+2021-07-06 02:52:49,878:INFO:   [View 2] ACC: 42.4923 | mIoU: 11.7085
+2021-07-06 02:52:49,878:INFO: ========================================
+
+2021-07-06 02:52:50,838:INFO: 
+============================= [Epoch 7] =============================
+
+2021-07-06 02:52:50,838:INFO: Start computing centroids.
+2021-07-06 02:53:10,940:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 02:53:10,943:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 02:53:11,733:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 02:57:05,591:INFO: Initial k-means loss: 0.0502 
+2021-07-06 03:03:05,264:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0509
+2021-07-06 03:10:26,754:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 03:10:26,754:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 03:10:27,359:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 03:14:03,444:INFO: Initial k-means loss: 0.0475 
+2021-07-06 03:19:26,072:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0486
+2021-07-06 03:25:37,281:INFO: -Centroids ready. [Loss: 0.05057| 0.04817/ Time: 0:0:32:47]
+
+2021-07-06 03:25:56,688:INFO: Centroid size      : [27, 128]
+2021-07-06 03:25:56,690:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 03:25:56,691:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 03:25:57,491:INFO: [Assigning labels] 0 / 194
+2021-07-06 03:41:11,132:INFO: Centroid size      : [27, 128]
+2021-07-06 03:41:11,132:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 03:41:11,133:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 03:41:11,595:INFO: [Assigning labels] 0 / 194
+2021-07-06 03:53:58,378:INFO: -Cluster labels ready. [0:0:28:21]
+
+2021-07-06 03:53:58,380:INFO: Start training ...
+2021-07-06 03:54:14,509:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 03:54:14,510:INFO: Batch label size   : [128, 80, 80]
+2021-07-06 03:54:14,510:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 03:54:15,191:INFO: 0 / 388	
+2021-07-06 04:07:18,925:INFO: 200 / 388	
+2021-07-06 04:19:16,200:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 04:19:21,747:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 04:19:21,750:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 04:19:21,750:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 04:19:22,253:INFO: 0/17
+2021-07-06 04:19:41,711:INFO: ACC  - All  : 42.1898
+2021-07-06 04:19:41,711:INFO: mIOU - All  : 11.2518
+2021-07-06 04:19:41,711:INFO: ACC  - Thing: 80.9972
+2021-07-06 04:19:41,712:INFO: mIOU - Thing: 27.9954
+2021-07-06 04:19:41,712:INFO: ACC  - Stuff: 48.0267
+2021-07-06 04:19:41,712:INFO: mIOU - Stuff: 15.6333
+2021-07-06 04:19:41,720:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 04:19:46,488:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 04:19:46,489:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 04:19:46,489:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 04:19:47,142:INFO: 0/17
+2021-07-06 04:20:07,195:INFO: ACC  - All  : 41.8489
+2021-07-06 04:20:07,195:INFO: mIOU - All  : 11.0988
+2021-07-06 04:20:07,195:INFO: ACC  - Thing: 58.1396
+2021-07-06 04:20:07,195:INFO: mIOU - Thing: 24.0323
+2021-07-06 04:20:07,195:INFO: ACC  - Stuff: 84.4367
+2021-07-06 04:20:07,195:INFO: mIOU - Stuff: 20.9227
+2021-07-06 04:20:07,202:INFO: ============== Epoch [7] ==============
+2021-07-06 04:20:07,202:INFO:   Time: [0:1:27:17]
+2021-07-06 04:20:07,202:INFO:   K-Means loss   : 0.05057 | 0.04817
+2021-07-06 04:20:07,202:INFO:   Training Total Loss  : 2.46353
+2021-07-06 04:20:07,202:INFO:   Training CE Loss (Total | Within | Across) : 2.46353 | 2.44452 | 2.48253
+2021-07-06 04:20:07,202:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-06 04:20:07,202:INFO:   [View 1] ACC: 42.1898 | mIoU: 11.2518
+2021-07-06 04:20:07,202:INFO:   [View 2] ACC: 41.8489 | mIoU: 11.0988
+2021-07-06 04:20:07,202:INFO: ========================================
+
+2021-07-06 04:20:08,330:INFO: 
+============================= [Epoch 8] =============================
+
+2021-07-06 04:20:08,330:INFO: Start computing centroids.
+2021-07-06 04:20:29,089:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 04:20:29,092:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 04:20:29,884:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 04:24:13,531:INFO: Initial k-means loss: 0.0485 
+2021-07-06 04:30:44,626:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0480
+2021-07-06 04:38:24,831:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 04:38:24,831:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 04:38:25,402:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 04:41:54,207:INFO: Initial k-means loss: 0.0442 
+2021-07-06 04:47:15,714:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0445
+2021-07-06 04:53:33,908:INFO: -Centroids ready. [Loss: 0.04763| 0.04420/ Time: 0:0:33:25]
+
+2021-07-06 04:53:53,113:INFO: Centroid size      : [27, 128]
+2021-07-06 04:53:53,115:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 04:53:53,115:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 04:53:53,790:INFO: [Assigning labels] 0 / 194
+2021-07-06 05:08:48,982:INFO: Centroid size      : [27, 128]
+2021-07-06 05:08:48,982:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 05:08:48,983:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 05:08:49,543:INFO: [Assigning labels] 0 / 194
+2021-07-06 05:22:34,737:INFO: -Cluster labels ready. [0:0:29:1]
+
+2021-07-06 05:22:34,738:INFO: Start training ...
+2021-07-06 05:22:52,083:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 05:22:52,085:INFO: Batch label size   : [128, 80, 80]
+2021-07-06 05:22:52,085:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 05:22:52,890:INFO: 0 / 388	
+2021-07-06 05:36:10,080:INFO: 200 / 388	
+2021-07-06 05:48:58,735:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 05:49:04,559:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 05:49:04,570:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 05:49:04,570:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 05:49:04,921:INFO: 0/17
+2021-07-06 05:49:23,510:INFO: ACC  - All  : 41.1806
+2021-07-06 05:49:23,511:INFO: mIOU - All  : 10.9396
+2021-07-06 05:49:23,511:INFO: ACC  - Thing: 72.7157
+2021-07-06 05:49:23,511:INFO: mIOU - Thing: 23.4508
+2021-07-06 05:49:23,511:INFO: ACC  - Stuff: 44.2404
+2021-07-06 05:49:23,511:INFO: mIOU - Stuff: 15.7478
+2021-07-06 05:49:23,517:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 05:49:28,508:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 05:49:28,621:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 05:49:28,621:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 05:49:28,993:INFO: 0/17
+2021-07-06 05:49:47,857:INFO: ACC  - All  : 41.1851
+2021-07-06 05:49:47,857:INFO: mIOU - All  : 10.5303
+2021-07-06 05:49:47,857:INFO: ACC  - Thing: 58.2466
+2021-07-06 05:49:47,857:INFO: mIOU - Thing: 17.7260
+2021-07-06 05:49:47,858:INFO: ACC  - Stuff: 47.9512
+2021-07-06 05:49:47,858:INFO: mIOU - Stuff: 17.9727
+2021-07-06 05:49:47,864:INFO: ============== Epoch [8] ==============
+2021-07-06 05:49:47,864:INFO:   Time: [0:1:29:39]
+2021-07-06 05:49:47,864:INFO:   K-Means loss   : 0.04763 | 0.04420
+2021-07-06 05:49:47,864:INFO:   Training Total Loss  : 2.46177
+2021-07-06 05:49:47,864:INFO:   Training CE Loss (Total | Within | Across) : 2.46177 | 2.44376 | 2.47979
+2021-07-06 05:49:47,864:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-06 05:49:47,864:INFO:   [View 1] ACC: 41.1806 | mIoU: 10.9396
+2021-07-06 05:49:47,864:INFO:   [View 2] ACC: 41.1851 | mIoU: 10.5303
+2021-07-06 05:49:47,864:INFO: ========================================
+
+2021-07-06 05:49:48,807:INFO: 
+============================= [Epoch 9] =============================
+
+2021-07-06 05:49:48,807:INFO: Start computing centroids.
+2021-07-06 05:50:09,750:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 05:50:09,753:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 05:50:10,550:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 05:54:04,506:INFO: Initial k-means loss: 0.0444 
+2021-07-06 06:00:16,460:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0426
+2021-07-06 06:08:06,333:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 06:08:06,334:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 06:08:07,040:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 06:12:11,370:INFO: Initial k-means loss: 0.0376 
+2021-07-06 06:17:36,321:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0363
+2021-07-06 06:23:51,830:INFO: -Centroids ready. [Loss: 0.04272| 0.03628/ Time: 0:0:34:3]
+
+2021-07-06 06:24:12,039:INFO: Centroid size      : [27, 128]
+2021-07-06 06:24:12,040:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 06:24:12,041:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 06:24:12,807:INFO: [Assigning labels] 0 / 194
+2021-07-06 06:39:45,744:INFO: Centroid size      : [27, 128]
+2021-07-06 06:39:45,746:INFO: Batch input size   : [256, 3, 320, 320]
+2021-07-06 06:39:45,746:INFO: Batch feature size : [256, 128, 80, 80]
+
+2021-07-06 06:39:46,298:INFO: [Assigning labels] 0 / 194
+2021-07-06 06:52:45,307:INFO: -Cluster labels ready. [0:0:28:54]
+
+2021-07-06 06:52:45,309:INFO: Start training ...
+2021-07-06 06:53:03,895:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 06:53:03,897:INFO: Batch label size   : [128, 80, 80]
+2021-07-06 06:53:03,897:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 06:53:04,576:INFO: 0 / 388	
+2021-07-06 07:06:07,793:INFO: 200 / 388	
+2021-07-06 07:18:10,329:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 07:18:15,427:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 07:18:15,428:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 07:18:15,428:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 07:18:15,803:INFO: 0/17
+2021-07-06 07:18:35,523:INFO: ACC  - All  : 39.8519
+2021-07-06 07:18:35,524:INFO: mIOU - All  : 9.8398
+2021-07-06 07:18:35,524:INFO: ACC  - Thing: 61.5777
+2021-07-06 07:18:35,524:INFO: mIOU - Thing: 15.9328
+2021-07-06 07:18:35,524:INFO: ACC  - Stuff: 52.5634
+2021-07-06 07:18:35,524:INFO: mIOU - Stuff: 15.5807
+2021-07-06 07:18:35,533:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 07:18:40,647:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 07:18:40,650:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 07:18:40,650:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 07:18:41,066:INFO: 0/17
+2021-07-06 07:18:59,476:INFO: ACC  - All  : 39.4778
+2021-07-06 07:18:59,476:INFO: mIOU - All  : 9.9229
+2021-07-06 07:18:59,476:INFO: ACC  - Thing: 58.9360
+2021-07-06 07:18:59,476:INFO: mIOU - Thing: 18.2472
+2021-07-06 07:18:59,477:INFO: ACC  - Stuff: 55.8467
+2021-07-06 07:18:59,477:INFO: mIOU - Stuff: 15.7147
+2021-07-06 07:18:59,483:INFO: ============== Epoch [9] ==============
+2021-07-06 07:18:59,483:INFO:   Time: [0:1:29:11]
+2021-07-06 07:18:59,483:INFO:   K-Means loss   : 0.04272 | 0.03628
+2021-07-06 07:18:59,483:INFO:   Training Total Loss  : 2.47801
+2021-07-06 07:18:59,483:INFO:   Training CE Loss (Total | Within | Across) : 2.47801 | 2.46151 | 2.49451
+2021-07-06 07:18:59,483:INFO:   Training MSE Loss (Total) : 0.00000
+2021-07-06 07:18:59,483:INFO:   [View 1] ACC: 39.8519 | mIoU: 9.8398
+2021-07-06 07:18:59,483:INFO:   [View 2] ACC: 39.4778 | mIoU: 9.9229
+2021-07-06 07:18:59,483:INFO: ========================================
+
+2021-07-06 07:18:59,974:INFO: Start computing centroids.
+2021-07-06 07:19:05,688:INFO: Batch input size : [256, 3, 320, 320]
+2021-07-06 07:19:05,692:INFO: Batch feature : [256, 128, 80, 80]
+2021-07-06 07:19:06,577:INFO: [Saving features]: 0 / 194 | [K-Means Loss]: 0.0000
+2021-07-06 07:21:50,744:INFO: Initial k-means loss: 0.0344 
+2021-07-06 07:25:45,751:INFO: [Saving features]: 100 / 194 | [K-Means Loss]: 0.0349
+2021-07-06 07:30:08,442:INFO: -Centroids ready. [Loss: 0.03461/ Time: 0:0:11:9]
+
+2021-07-06 07:30:08,444:INFO: ====== METRIC TEST : cosine ======
+
+2021-07-06 07:30:13,348:INFO: Batch input size   : [128, 3, 320, 320]
+2021-07-06 07:30:13,349:INFO: Batch label size   : [128, 320, 320]
+2021-07-06 07:30:13,350:INFO: Batch feature size : [128, 128, 80, 80]
+
+2021-07-06 07:30:14,027:INFO: 0/17
+2021-07-06 07:30:34,007:INFO: ACC  - All  : 39.6270
+2021-07-06 07:30:34,008:INFO: mIOU - All  : 9.6489
+2021-07-06 07:30:34,008:INFO: ACC  - Thing: 55.6383
+2021-07-06 07:30:34,008:INFO: mIOU - Thing: 19.0383
+2021-07-06 07:30:34,008:INFO: ACC  - Stuff: 65.4857
+2021-07-06 07:30:34,008:INFO: mIOU - Stuff: 17.1457
+2021-07-06 07:30:34,015:INFO: Average overall pixel accuracy [NEW] : 39.627 +/- 0.000.
+2021-07-06 07:30:34,015:INFO: Average mIoU [NEW] : 9.649 +/- 0.000. 
+2021-07-06 07:30:34,015:INFO: Experiment done. [0:14:41:1]
+
