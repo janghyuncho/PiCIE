@@ -62,7 +62,6 @@ def run_mini_batch_kmeans(args, logger, dataloader, model, view):
     # Choose which view it is now. 
     dataloader.dataset.view = view
 
-    # Only first run use online batch stats.
     model.eval()
     with torch.no_grad():
         for i_batch, (indice, image) in enumerate(dataloader):
@@ -91,7 +90,7 @@ def run_mini_batch_kmeans(args, logger, dataloader, model, view):
                 featslist.append(feats)
                 num_batches += 1
                 
-                if num_batches == args.num_init_batches:
+                if num_batches == args.num_init_batches or num_batches == len(dataloader):
                     if first_batch:
                         # Compute initial centroids. 
                         # By doing so, we avoid empty cluster problem from mini-batch K-Means. 
@@ -173,9 +172,7 @@ def compute_labels(args, logger, dataloader, model, centroids, view):
 
             # Save labels and count. 
             for idx, idx_img in enumerate(indice):
-                # If [mask_norm], we count only 1 per mask. 
                 counts += postprocess_label(args, K, idx, idx_img, scores, n_dual=view)
-
 
             if (i % 200) == 0:
                 logger.info('[Assigning labels] {} / {}'.format(i, len(dataloader)))
@@ -205,7 +202,7 @@ def evaluate(args, logger, dataloader, classifier, model):
                 logger.info('Batch feature size : {}\n'.format(list(feats.shape)))
 
             probs = classifier(feats)
-            probs = F.interpolate(probs, args.res, mode='bilinear', align_corners=False)
+            probs = F.interpolate(probs, label.shape[-2:], mode='bilinear', align_corners=False)
             preds = probs.topk(1, dim=1)[1].view(B, -1).cpu().numpy()
             label = label.view(B, -1).cpu().numpy()
 
@@ -223,9 +220,19 @@ def evaluate(args, logger, dataloader, classifier, model):
     new_hist = np.zeros((args.K_test, args.K_test))
     for idx in range(args.K_test):
         new_hist[m[idx, 1]] = histogram[idx]
-
-    result = get_result_metrics(new_hist)
-    logger.info('All ACC  : {:.4f} | {:.4f}.'.format(result['overall_precision (pixel accuracy)'], result['mean_precision (class-avg accuracy)']))
-    logger.info('m IOU    : {:.4f}'.format(result['mean_iou']))
     
-    return acc, result
+    # NOTE: Now [new_hist] is re-ordered to 12 thing + 15 stuff classses. 
+    res1 = get_result_metrics(new_hist)
+    logger.info('ACC  - All: {:.4f}'.format(res1['overall_precision (pixel accuracy)']))
+    logger.info('mIOU - All: {:.4f}'.format(res1['mean_iou']))
+
+    # For Table 2 - partitioned evaluation.
+    res2 = get_result_metrics(new_hist[:12, :12])
+    logger.info('ACC  - Thing: {:.4f}'.format(res2['overall_precision (pixel accuracy)']))
+    logger.info('mIOU - Thing: {:.4f}'.format(res2['mean_iou']))
+
+    res3 = get_result_metrics(new_hist[12:, 12:])
+    logger.info('ACC  - Stuff: {:.4f}'.format(res3['overall_precision (pixel accuracy)']))
+    logger.info('mIOU - Stuff: {:.4f}'.format(res3['mean_iou']))
+    
+    return acc, res1
