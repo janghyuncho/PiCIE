@@ -82,9 +82,8 @@ We have pretrained PiCIE weights.
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
 |PiCIE |COCO       |weight|log  |
-|PiCIE |Cityscapes |weight|log |
-|MDC   |COCO       |weight|log |
-|MDC   |Cityscapes |weight|log |
+|MDC   |COCO       |weight|log  |
+
 
 
 ## Visualization (To be updated soon)
