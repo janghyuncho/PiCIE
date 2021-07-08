@@ -108,5 +108,5 @@ We thank Facebook AI Research for the open-soource library [Faiss](https://githu
 - [x] Clear up and add complete train & test codes. 
 - [x] Baseline MDC code.
 - [x] Weights and logs.
-- [ ] Make visualization notebook easier to use + better colors. 
+- [x] Make visualization notebook easier to use + better colors. 
 
