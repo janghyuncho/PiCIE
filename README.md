@@ -77,7 +77,7 @@ Below line will run the testing code with default setting in the background.
 nohup ./sh_files/test_picie.sh > logs/picie_test.out &
 ~~~
 
-## Pretrained Models (To be updated soon)
+## Pretrained Models 
 We have pretrained PiCIE weights. 
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
@@ -86,7 +86,7 @@ We have pretrained PiCIE weights.
 
 
 
-## Visualization (To be updated soon)
+## Visualization 
 We prepared [a jupyter notebook](visualize.ipynb) for visualization.
 
 
