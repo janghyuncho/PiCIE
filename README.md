@@ -81,8 +81,8 @@ nohup ./sh_files/test_picie.sh > logs/picie_test.out &
 We have pretrained PiCIE weights. 
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
-|PiCIE |COCO       |weight|log  |
-|MDC   |COCO       |weight|log  |
+|PiCIE |COCO       |[weight](https://drive.google.com/file/d/1VI5detMlDNkwWpv7M-gk7aAHgfQVebWo/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/picie.out)  |
+|MDC   |COCO       |[weight](https://drive.google.com/file/d/1NzQQ4u__nz5xh-_zOFi_DPOHW6Gv_nbm/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/mdc.out)  |
 
 
 
@@ -107,6 +107,6 @@ We thank Facebook AI Research for the open-soource library [Faiss](https://githu
 - [x] Dependency & dataset setup.
 - [x] Clear up and add complete train & test codes. 
 - [x] Baseline MDC code.
-- [ ] Weights and logs.
+- [x] Weights and logs.
 - [ ] Make visualization notebook easier to use + better colors. 
 
