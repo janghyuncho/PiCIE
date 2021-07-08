@@ -64,6 +64,12 @@ def parse_arguments():
     parser.add_argument('--v_flip', action='store_true', default=False)
     parser.add_argument('--random_crop', action='store_true', default=False)
     parser.add_argument('--val_type', type=str, default='val')
+    parser.add_argument('--version', type=int, default=7)
+    parser.add_argument('--fullcoco', action='store_true', default=False)
+    
+    # Eval-only
+    parser.add_argument('--eval_only', action='store_true', default=False)
+    parser.add_argument('--eval_path', type=str)
 
     return parser.parse_args()
 
@@ -133,7 +139,7 @@ def main(args, logger):
                         scale=(args.min_scale, 1)) # NOTE: For now, max_scale = 1.  
     trainloader = torch.utils.data.DataLoader(trainset, 
                                                 batch_size=args.batch_size_cluster,
-                                                shuffle=False, 
+                                                shuffle=True, 
                                                 num_workers=args.num_workers,
                                                 pin_memory=True,
                                                 collate_fn=collate_train_baseline,
@@ -157,7 +163,7 @@ def main(args, logger):
         logger.info('\n============================= [Epoch {}] =============================\n'.format(epoch))
         logger.info('Start computing centroids.')
         t1 = t.time()
-        centroids, kmloss = run_mini_batch_kmeans(args, logger, trainloader, model, view=1, is_first=(epoch==args.start_epoch))
+        centroids, kmloss = run_mini_batch_kmeans(args, logger, trainloader, model, view=1)
         logger.info('-Centroids ready. [{}]\n'.format(get_datetime(int(t.time())-int(t1))))
 
         # Compute cluster assignment. 
@@ -198,7 +204,7 @@ def main(args, logger):
 
         logger.info('Start training ...')
         train_loss = train(args, logger, trainloader_loop, model, classifier, criterion, optimizer, optimizer_loop) 
-        acc, res   = evaluate(args, logger, testloader, classifier1, model)
+        acc, res   = evaluate(args, logger, testloader, classifier, model)
 
         logger.info('========== Epoch [{}] =========='.format(epoch))
         logger.info('  Time total : [{}].'.format(get_datetime(int(t.time())-int(t1))))
@@ -249,7 +255,7 @@ def main(args, logger):
     if args.repeats > 0:
         for _ in range(args.repeats):
             t1 = t.time()
-            centroids, kmloss = run_mini_batch_kmeans(args, logger, trainloader, model, view=-1, is_first=False)
+            centroids, kmloss = run_mini_batch_kmeans(args, logger, trainloader, model, view=-1)
             logger.info('-Centroids ready. [Loss: {:.5f}/ Time: {}]\n'.format(kmloss, get_datetime(int(t.time())-int(t1))))
             
             classifier = initialize_classifier(args)
@@ -257,11 +263,11 @@ def main(args, logger):
             freeze_all(classifier)
             
             acc_new, res_new = evaluate(args, logger, testloader, classifier, model)
-            acc_list_new.append(acc_new*100)
+            acc_list_new.append(acc_new)
             res_list_new.append(res_new)
     else:
         acc_new, res_new = evaluate(args, logger, testloader, classifier, model)
-        acc_list_new.append(acc_new*100)
+        acc_list_new.append(acc_new)
         res_list_new.append(res_new)
 
     logger.info('Average overall pixel accuracy [NEW] : {} +/- {}.'.format(round(np.mean(acc_list_new), 2), np.std(acc_list_new)))

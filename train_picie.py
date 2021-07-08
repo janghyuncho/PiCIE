@@ -30,11 +30,11 @@ def parse_arguments():
     parser.add_argument('--pretrain', action='store_true', default=False)
     parser.add_argument('--res', type=int, default=320, help='Input size.')
     parser.add_argument('--res1', type=int, default=320, help='Input size scale from.')
-    parser.add_argument('--res2', type=int, default=320, help='Input size scale to.')
-    parser.add_argument('--batch_size_cluster', type=int, default=512)
+    parser.add_argument('--res2', type=int, default=640, help='Input size scale to.')
+    parser.add_argument('--batch_size_cluster', type=int, default=256)
     parser.add_argument('--batch_size_train', type=int, default=128)
     parser.add_argument('--batch_size_test', type=int, default=128)
-    parser.add_argument('--lr', type=float, default=1e-3)
+    parser.add_argument('--lr', type=float, default=1e-4)
     parser.add_argument('--weight_decay', type=float, default=5e-4)
     parser.add_argument('--momentum', type=float, default=0.9)
     parser.add_argument('--optim_type', type=str, default='Adam')
@@ -65,6 +65,8 @@ def parse_arguments():
     parser.add_argument('--v_flip', action='store_true', default=False)
     parser.add_argument('--random_crop', action='store_true', default=False)
     parser.add_argument('--val_type', type=str, default='train')
+    parser.add_argument('--version', type=int, default=7)
+    parser.add_argument('--fullcoco', action='store_true', default=False)
 
     # Eval-only
     parser.add_argument('--eval_only', action='store_true', default=False)
@@ -179,7 +181,7 @@ def main(args, logger):
                         thing=args.thing, stuff=args.stuff, scale=(args.min_scale, 1)) # NOTE: For now, max_scale = 1.  
     trainloader = torch.utils.data.DataLoader(trainset, 
                                                 batch_size=args.batch_size_cluster,
-                                                shuffle=True, 
+                                                shuffle=False, 
                                                 num_workers=args.num_workers,
                                                 pin_memory=True,
                                                 collate_fn=collate_train,
@@ -188,11 +190,15 @@ def main(args, logger):
     testset    = EvalCOCO(args.data_root, res=args.res, split='val', mode='test', stuff=args.stuff, thing=args.thing)
     testloader = torch.utils.data.DataLoader(testset,
                                              batch_size=args.batch_size_test,
-                                             shuffle=True,
+                                             shuffle=False,
                                              num_workers=args.num_workers,
                                              pin_memory=True,
                                              collate_fn=collate_eval,
                                              worker_init_fn=worker_init_fn(args.seed))
+    
+    # Before train.
+    _, _ = evaluate(args, logger, testloader, classifier1, model)
+    
     # Train start.
     for epoch in range(args.start_epoch, args.num_epoch):
         # Assign probs. 
@@ -245,15 +251,17 @@ def main(args, logger):
 
         logger.info('Start training ...')
         train_loss, train_cet, cet_within, cet_across, train_mse = train(args, logger, trainloader_loop, model, classifier1, classifier2, criterion1, criterion2, optimizer, epoch) 
-        acc, res = evaluate(args, logger, testloader, classifier1, model)
+        acc1, res1 = evaluate(args, logger, testloader, classifier1, model)
+        acc2, res2 = evaluate(args, logger, testloader, classifier2, model)
         
         logger.info('============== Epoch [{}] =============='.format(epoch))
-        logger.info('  Time: [{}].'.format(get_datetime(int(t.time())-int(t1))))
-        logger.info('  K-Means loss   : {:.5f} | {:.5f}.'.format(kmloss1, kmloss2))
+        logger.info('  Time: [{}]'.format(get_datetime(int(t.time())-int(t1))))
+        logger.info('  K-Means loss   : {:.5f} | {:.5f}'.format(kmloss1, kmloss2))
         logger.info('  Training Total Loss  : {:.5f}'.format(train_loss))
-        logger.info('  Training CE Loss (Total | Within | Across) : {:.5f} | {:.5f} | {:.5f}.'.format(train_cet, cet_within, cet_across))
-        logger.info('  Training MSE Loss (Total) : {:.5f}.'.format(train_mse))
-        logger.info('  ACC: {:.4f} | mIoU: {:.4f}'.format(acc, res['mean_iou']))
+        logger.info('  Training CE Loss (Total | Within | Across) : {:.5f} | {:.5f} | {:.5f}'.format(train_cet, cet_within, cet_across))
+        logger.info('  Training MSE Loss (Total) : {:.5f}'.format(train_mse))
+        logger.info('  [View 1] ACC: {:.4f} | mIoU: {:.4f}'.format(acc1, res1['mean_iou']))
+        logger.info('  [View 2] ACC: {:.4f} | mIoU: {:.4f}'.format(acc2, res2['mean_iou']))
         logger.info('========================================\n')
         
 
@@ -301,7 +309,7 @@ def main(args, logger):
     if args.repeats > 0:
         for _ in range(args.repeats):
             t1 = t.time()
-            centroids1, kmloss1 = run_mini_batch_kmeans(args, logger, trainloader, model, view=-1, is_first=False)
+            centroids1, kmloss1 = run_mini_batch_kmeans(args, logger, trainloader, model, view=-1)
             logger.info('-Centroids ready. [Loss: {:.5f}/ Time: {}]\n'.format(kmloss1, get_datetime(int(t.time())-int(t1))))
             
             classifier1 = initialize_classifier(args)
@@ -309,11 +317,11 @@ def main(args, logger):
             freeze_all(classifier1)
             
             acc_new, res_new = evaluate(args, logger, testloader, classifier1, model)
-            acc_list_new.append(acc_new*100)
+            acc_list_new.append(acc_new)
             res_list_new.append(res_new)
     else:
         acc_new, res_new = evaluate(args, logger, testloader, classifier1, model)
-        acc_list_new.append(acc_new*100)
+        acc_list_new.append(acc_new)
         res_list_new.append(res_new)
 
     logger.info('Average overall pixel accuracy [NEW] : {:.3f} +/- {:.3f}.'.format(np.mean(acc_list_new), np.std(acc_list_new)))
