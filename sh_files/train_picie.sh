@@ -4,16 +4,18 @@ bsize=256
 num_epoch=10
 KM_INIT=20
 KM_NUM=1
-KM_ITER=10
-SEED=2021
+KM_ITER=20
+SEED=1
+LR=1e-4
 
-mkdir -p results/picie/
+mkdir -p results/picie/train/${SEED}
 
 python train_picie.py \
 --data_root datasets/coco/ \
---save_root results/picie/ \
+--save_root results/picie/train/${SEED} \
 --pretrain \
 --repeats 1 \
+--lr ${LR} \
 --seed ${SEED} \
 --num_init_batches ${KM_INIT} \
 --num_batches ${KM_NUM} \

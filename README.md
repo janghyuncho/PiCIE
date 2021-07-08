@@ -28,7 +28,7 @@ conda env create -f env.yml
 ~~~
 
 ### Preparing Dataset 
-Please download the [trainset](http://images.cocodataset.org/zips/train2017.zip) and the [validset](http://images.cocodataset.org/zips/val2017.zip) of COCO dataset as well as the [annotations](http://images.cocodataset.org/annotations/annotations_trainval2017.zip). Place the dataset as following:
+Please download the [trainset](http://images.cocodataset.org/zips/train2017.zip) and the [validset](http://images.cocodataset.org/zips/val2017.zip) of COCO dataset as well as the [annotations](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/stuffthingmaps_trainval2017.zip) and the [json files](http://images.cocodataset.org/annotations/annotations_trainval2017.zip). Place the dataset as following:
 ~~~
 /your/dataset/directory/
       └── coco/
@@ -40,6 +40,12 @@ Please download the [trainset](http://images.cocodataset.org/zips/train2017.zip)
             │             ├── xxxxxxxxx.jpg
             │             └── ...
             └── annotations/
+                  ├── train2017/
+                  │       ├── xxxxxxxxx.png
+                  │       └── ...
+                  ├── val2017/
+                  │       ├── xxxxxxxxx.png
+                  │       └── ...
                   ├── COCO_2017_train.json
                   └── COCO_2017_val.json
 ~~~
@@ -56,7 +62,7 @@ Finally, move *curated* folder to *datasets/coco/*:
 ~~~
 mv curated datasets/coco/
 ~~~
-This will setup the dataset that contains the same set of images with [IIC](https://github.com/xu-ji/IIC).
+This will setup the dataset that contains the same set of images with [IIC](https://github.com/xu-ji/IIC/blob/master/code/datasets/segmentation/cocostuff.py) ([config](https://github.com/xu-ji/IIC/blob/master/examples/commands.txt)).
 
 ## Running PiCIE 
 Below are training and testing commands to train PiCIE. 
@@ -76,9 +82,8 @@ We have pretrained PiCIE weights.
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
 |PiCIE |COCO       |weight|log  |
-|PiCIE |Cityscapes |weight|log |
-|MDC   |COCO       |weight|log |
-|MDC   |Cityscapes |weight|log |
+|MDC   |COCO       |weight|log  |
+
 
 
 ## Visualization (To be updated soon)
