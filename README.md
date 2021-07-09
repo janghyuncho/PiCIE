@@ -17,6 +17,8 @@ This repository is the official implementation of [PiCIE: Unsupervised Semantic 
 Contact: Jang Hyun Cho [janghyuncho7@utexas.edu](mailto:janghyuncho7@utexas.edu). 
 
 Please feel free to reach out for any questions or discussions!
+## News 
+[07/06/2021] Unstable training bug fixed + weights and logs uploaded. 
 
 ## Setup
 Setting up for this project involves installing dependencies and preparing the datasets. 
