@@ -17,6 +17,8 @@ This repository is the official implementation of [PiCIE: Unsupervised Semantic 
 Contact: Jang Hyun Cho [janghyuncho7@utexas.edu](mailto:janghyuncho7@utexas.edu). 
 
 Please feel free to reach out for any questions or discussions!
+## News 
+[07/06/2021] Unstable training bug fixed + weights and logs uploaded. 
 
 ## Setup
 Setting up for this project involves installing dependencies and preparing the datasets. 
@@ -77,16 +79,16 @@ Below line will run the testing code with default setting in the background.
 nohup ./sh_files/test_picie.sh > logs/picie_test.out &
 ~~~
 
-## Pretrained Models (To be updated soon)
+## Pretrained Models 
 We have pretrained PiCIE weights. 
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
-|PiCIE |COCO       |weight|log  |
-|MDC   |COCO       |weight|log  |
+|PiCIE |COCO       |[weight](https://drive.google.com/file/d/1VI5detMlDNkwWpv7M-gk7aAHgfQVebWo/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/picie.out)  |
+|MDC   |COCO       |[weight](https://drive.google.com/file/d/1NzQQ4u__nz5xh-_zOFi_DPOHW6Gv_nbm/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/mdc.out)  |
 
 
 
-## Visualization (To be updated soon)
+## Visualization 
 We prepared [a jupyter notebook](visualize.ipynb) for visualization.
 
 
@@ -107,6 +109,6 @@ We thank Facebook AI Research for the open-soource library [Faiss](https://githu
 - [x] Dependency & dataset setup.
 - [x] Clear up and add complete train & test codes. 
 - [x] Baseline MDC code.
-- [ ] Weights and logs.
-- [ ] Make visualization notebook easier to use + better colors. 
+- [x] Weights and logs.
+- [x] Make visualization notebook easier to use + better colors. 
 
