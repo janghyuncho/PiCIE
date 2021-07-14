@@ -75,7 +75,7 @@ Below line will run the training code with default setting in the background.
 ~~~
 nohup ./sh_files/train_picie.sh > logs/picie_train.out & 
 ~~~
-Below line will run the testing code with default setting in the background.
+Below line will run the testing code with default setting in the background. 
 ### Testing 
 ~~~
 nohup ./sh_files/test_picie.sh > logs/picie_test.out &
