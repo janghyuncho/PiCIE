@@ -19,6 +19,7 @@ Contact: Jang Hyun Cho [janghyuncho7@utexas.edu](mailto:janghyuncho7@utexas.edu)
 Please feel free to reach out for any questions or discussions!
 ## News 
 [07/14/2021] Added "fine_to_coarse_dict.pickle" file. 
+
 [07/06/2021] Unstable training bug fixed + weights and logs uploaded. 
 
 ## Setup
