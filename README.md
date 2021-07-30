@@ -18,6 +18,8 @@ Contact: Jang Hyun Cho [janghyuncho7@utexas.edu](mailto:janghyuncho7@utexas.edu)
 
 Please feel free to reach out for any questions or discussions!
 ## News 
+[07/14/2021] Added "fine_to_coarse_dict.pickle" file. 
+
 [07/06/2021] Unstable training bug fixed + weights and logs uploaded. 
 
 ## Setup
@@ -60,9 +62,10 @@ Similarly, setup a symbolic link for the save directory as following:
 ~~~
 ln -s /your/save/directory/ results
 ~~~
-Finally, move *curated* folder to *datasets/coco/*:
+Finally, move *curated* folder and *fine_to_coarse_dict.pickle* file to *datasets/coco/*:
 ~~~
 mv curated datasets/coco/
+mv fine_to_coarse_dict.pickle datasets/coco/
 ~~~
 This will setup the dataset that contains the same set of images with [IIC](https://github.com/xu-ji/IIC/blob/master/code/datasets/segmentation/cocostuff.py) ([config](https://github.com/xu-ji/IIC/blob/master/examples/commands.txt)).
 
@@ -73,7 +76,7 @@ Below line will run the training code with default setting in the background.
 ~~~
 nohup ./sh_files/train_picie.sh > logs/picie_train.out & 
 ~~~
-Below line will run the testing code with default setting in the background.
+Below line will run the testing code with default setting in the background. 
 ### Testing 
 ~~~
 nohup ./sh_files/test_picie.sh > logs/picie_test.out &
