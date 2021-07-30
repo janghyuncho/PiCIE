@@ -96,7 +96,7 @@ class TrainCOCO(data.Dataset):
         elif 'train' in self.mode:
             # Invariance transform. 
             image1 = self.transform_inv(index, image, 0)
-            image1 = self.transform_tensor(image)
+            image1 = self.transform_tensor(image1)
 
             if self.mode == 'baseline_train':
                 return (image1, )
