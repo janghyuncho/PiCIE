@@ -18,7 +18,7 @@ Contact: Jang Hyun Cho [janghyuncho7@utexas.edu](mailto:janghyuncho7@utexas.edu)
 
 Please feel free to reach out for any questions or discussions!
 ## News 
-[07/31/2021] Minor update with the training dataset module (please see this [issue](https://github.com/janghyuncho/PiCIE/issues/7))
+[07/31/2021] Minor update on the training dataset module (please see this [issue](https://github.com/janghyuncho/PiCIE/issues/7)).
 
 [07/14/2021] Added "fine_to_coarse_dict.pickle" file. 
 
