@@ -90,6 +90,7 @@ We have pretrained PiCIE weights.
 |:----:|:---------:|:-----------------------------:|:------------------------:|
 |PiCIE |COCO       |[weight](https://drive.google.com/file/d/1VI5detMlDNkwWpv7M-gk7aAHgfQVebWo/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/picie.out)  |
 |MDC   |COCO       |[weight](https://drive.google.com/file/d/1NzQQ4u__nz5xh-_zOFi_DPOHW6Gv_nbm/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/mdc.out)  |
+|PiCIE | Cityscapes| [weight](https://urldefense.com/v3/__https://drive.google.com/file/d/1phk0hlpFT2RMmOqzQ6Csoj6HgnZFskbK/view?usp=sharing__;!!OToaGQ!4f5kMMLjSy4HWv9ov9Th7sF3SGJ4ZfvKkeQjRLpqnPPoZxGh7Hu5Lcqhg6F-awOuR4lG$) | log |
 
 
 
