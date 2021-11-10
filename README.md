@@ -18,6 +18,8 @@ Contact: Jang Hyun Cho [janghyuncho7@utexas.edu](mailto:janghyuncho7@utexas.edu)
 
 Please feel free to reach out for any questions or discussions!
 ## News 
+[07/31/2021] Minor update on the training dataset module (please see this [issue](https://github.com/janghyuncho/PiCIE/issues/7)).
+
 [07/14/2021] Added "fine_to_coarse_dict.pickle" file. 
 
 [07/06/2021] Unstable training bug fixed + weights and logs uploaded. 
@@ -88,6 +90,7 @@ We have pretrained PiCIE weights.
 |:----:|:---------:|:-----------------------------:|:------------------------:|
 |PiCIE |COCO       |[weight](https://drive.google.com/file/d/1VI5detMlDNkwWpv7M-gk7aAHgfQVebWo/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/picie.out)  |
 |MDC   |COCO       |[weight](https://drive.google.com/file/d/1NzQQ4u__nz5xh-_zOFi_DPOHW6Gv_nbm/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/mdc.out)  |
+|PiCIE | Cityscapes| [weight](https://urldefense.com/v3/__https://drive.google.com/file/d/1phk0hlpFT2RMmOqzQ6Csoj6HgnZFskbK/view?usp=sharing__;!!OToaGQ!4f5kMMLjSy4HWv9ov9Th7sF3SGJ4ZfvKkeQjRLpqnPPoZxGh7Hu5Lcqhg6F-awOuR4lG$) | log |
 
 
 
