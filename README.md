@@ -18,6 +18,8 @@ Contact: Jang Hyun Cho [janghyuncho7@utexas.edu](mailto:janghyuncho7@utexas.edu)
 
 Please feel free to reach out for any questions or discussions!
 ## News 
+[12/10/2021] Training and evaluation code for cityscapes dataset for PiCIE and MDC with trained weights and logs. 
+
 [07/31/2021] Minor update on the training dataset module (please see this [issue](https://github.com/janghyuncho/PiCIE/issues/7)).
 
 [07/14/2021] Added "fine_to_coarse_dict.pickle" file. 
@@ -88,9 +90,10 @@ nohup ./sh_files/test_picie.sh > logs/picie_test.out &
 We have pretrained PiCIE weights. 
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
-|PiCIE |COCO       |[weight](https://drive.google.com/file/d/1VI5detMlDNkwWpv7M-gk7aAHgfQVebWo/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/picie.out)  |
-|MDC   |COCO       |[weight](https://drive.google.com/file/d/1NzQQ4u__nz5xh-_zOFi_DPOHW6Gv_nbm/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/mdc.out)  |
-|PiCIE | Cityscapes| [weight](https://urldefense.com/v3/__https://drive.google.com/file/d/1phk0hlpFT2RMmOqzQ6Csoj6HgnZFskbK/view?usp=sharing__;!!OToaGQ!4f5kMMLjSy4HWv9ov9Th7sF3SGJ4ZfvKkeQjRLpqnPPoZxGh7Hu5Lcqhg6F-awOuR4lG$) | log |
+|PiCIE |COCO       |[weight](https://drive.google.com/file/d/1vAceui2F2y-Zy5oE1PB5yQeU7Oexb1kN/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/picie.out)  |
+|MDC   |COCO       |[weight](https://drive.google.com/file/d/1qMfTAU4SE3HfD6CpI4o18Y4oqIvW-rhy/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/mdc.out)  |
+|PiCIE | Cityscapes| [weight](https://urldefense.com/v3/__https://drive.google.com/file/d/1phk0hlpFT2RMmOqzQ6Csoj6HgnZFskbK/view?usp=sharing__;!!OToaGQ!4f5kMMLjSy4HWv9ov9Th7sF3SGJ4ZfvKkeQjRLpqnPPoZxGh7Hu5Lcqhg6F-awOuR4lG$) | [log](https://github.com/janghyuncho/PiCIE/blob/master/logs/reproduce/picie_city.out) |
+|MDC   | Cityscapes| [weight](https://drive.google.com/file/d/1TupnmoDH5jR_F4-OOflW5Ok7KH-olhvD/view?usp=sharing) | [log](https://github.com/janghyuncho/PiCIE/blob/master/logs/reproduce/mdc_city.out) |
 
 
 
