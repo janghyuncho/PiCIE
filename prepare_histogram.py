@@ -39,11 +39,11 @@ def compute_histogram(args, dataloader, model, classifier):
                 print('Batch feature size : {}\n'.format(feats.size()), flush=True)
             
             probs = compute_dist(feats, classifier)
-            probs = F.interpolate(probs, args.res2, mode='bilinear', align_corners=False)
+            probs = F.interpolate(probs, args.res1, mode='bilinear', align_corners=False)
             preds = probs.topk(1, dim=1)[1].view(probs.size(0), -1).cpu().numpy()
             label = label.view(probs.size(0), -1).cpu().numpy()
 
-            histogram += get_score_histogram(label, preds, args.K_test)
+            histogram += scores(label, preds, args.K_test)
             
     return histogram
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     args = parse_arguments()
     
     # Use random seed.
-    fix_seed_for_reproducability(args)
+    fix_seed_for_reproducability(args.seed)
 
     # Init model. 
     model = fpn.PanopticFPN(args)
@@ -59,21 +59,27 @@ if __name__ == '__main__':
     model = model.cuda()
 
     # Init classifier (for eval only.)
-    classifier = initialize_classifier(args, args.K_test)
+    classifier = initialize_classifier(args)
 
     # Load weights.
-    checkpoint = torch.load(args.save_root + 'checkpoint.pth.tar') # Place the checkpoint.pth.tar in the directory.
+    checkpoint = torch.load(args.eval_path) 
     model.load_state_dict(checkpoint['state_dict'])
     classifier.load_state_dict(checkpoint['classifier1_state_dict'])
 
-    # Prepare testloader.
-    trainloader, validloader = get_testloader(args)
+    # Prepare dataloader.
+    dataset    = get_dataset(args, mode='eval_test')
+    dataloader = torch.utils.data.DataLoader(dataset, 
+                                             batch_size=args.batch_size_test,
+                                             shuffle=False,
+                                             num_workers=args.num_workers,
+                                             pin_memory=True,
+                                             collate_fn=collate_eval,
+                                             worker_init_fn=worker_init_fn(args.seed))
 
     # Compute statistics.
-    histogram_train = compute_histogram(args, trainloader, model, classifier)
-    histogram_valid = compute_histogram(args, validloader, model, classifier)
+    histogram = compute_histogram(args, dataloader, model, classifier)
 
     # Save the result. 
-    torch.save([histogram_train, histogram_valid], args.save_root + '/histogram_coco.pkl')
+    torch.save(histogram, args.save_root + '/picie_histogram_coco.pkl')
     print('-Done.', flush=True)
 

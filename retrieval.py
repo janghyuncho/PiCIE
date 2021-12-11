@@ -9,7 +9,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from module import fpn
+from modules import fpn
 from commons import *
 from utils import *
 from train_picie import *
@@ -87,14 +87,14 @@ def get_nearest_neighbors(n_query, dataloader, model, classifier, k=10):
                 
     loclist = min_locs 
     dataset = dataloader.dataset
-    imglist = [[dataset.transform_data(*dataset.load_data(dataset.imdb[i]), i, True)[0] for i in ids] for ids in min_imgs]
+    imglist = [[dataset.transform_data(*dataset.load_data(dataset.imdb[i]), i, raw_image=True) for i in ids] for ids in min_imgs]
     return imglist, loclist
 
 if __name__ == '__main__':
     args = parse_arguments()
     
     # Use random seed.
-    fix_seed_for_reproducability(args)
+    fix_seed_for_reproducability(args.seed)
 
     # Init model. 
     model = fpn.PanopticFPN(args)
@@ -102,20 +102,27 @@ if __name__ == '__main__':
     model = model.cuda()
 
     # Load weights.
-    checkpoint = torch.load(args.save_root + 'checkpoint.pth.tar')
+    checkpoint = torch.load(args.eval_path) 
     model.load_state_dict(checkpoint['state_dict'])
     
     # Init classifier (for eval only.)
-    queries = torch.tensor(np.load('picie_querys.npy')).cuda()
+    queries = torch.tensor(np.load('querys.npy')).cuda()
     classifier = initialize_classifier(args, queries.size(0), queries)
 
-    # Prepare testloader.
-    testloader = get_testloader(args)
+    # Prepare dataloader.
+    dataset    = get_dataset(args, mode='eval_test')
+    dataloader = torch.utils.data.DataLoader(dataset, 
+                                             batch_size=args.batch_size_test,
+                                             shuffle=False,
+                                             num_workers=args.num_workers,
+                                             pin_memory=True,
+                                             collate_fn=collate_eval,
+                                             worker_init_fn=worker_init_fn(args.seed))
 
     # Retrieve 10-nearest neighbors.
-    imglist, loclist = get_nearest_neighbors(queries.size(0), testloader, model, classifier, k=args.K_test) 
+    imglist, loclist = get_nearest_neighbors(queries.size(0), dataloader, model, classifier, k=args.K_test) 
 
     # Save the result. 
-    torch.save([imglist, loclist], args.save_root + '/retrieval_result.pkl')
+    torch.save([imglist, loclist], args.save_root + '/picie_retrieval_result_coco.pkl')
     print('-Done.', flush=True)
 

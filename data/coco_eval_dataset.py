@@ -69,7 +69,7 @@ class EvalCOCO(data.Dataset):
 
         return image, label
 
-    def transform_data(self, image, label, index):
+    def transform_data(self, image, label, index, raw_image=False):
 
         # 1. Resize
         image = TF.resize(image, self.res, Image.BILINEAR)
@@ -82,6 +82,9 @@ class EvalCOCO(data.Dataset):
 
         image = TF.crop(image, top, left, self.res, self.res)
         label = TF.crop(label, top, left, self.res, self.res)
+
+        if raw_image:
+            return image
 
         # 3. Transformation
         image = self._image_transform(image, self.mode)
