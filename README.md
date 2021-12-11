@@ -90,7 +90,7 @@ nohup ./sh_files/test_picie.sh > logs/picie_test.out &
 We have pretrained PiCIE weights. 
 |Method|Dataset    |Pre-trained weight             | Train log                |
 |:----:|:---------:|:-----------------------------:|:------------------------:|
-|PiCIE |COCO       |[weight](https://drive.google.com/file/d/1vAceui2F2y-Zy5oE1PB5yQeU7Oexb1kN/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/picie.out)  |
+|PiCIE |COCO       |[weight](https://drive.google.com/file/d/1_mqJKc7DInyO7UHwpOAD5Hzmt1Jgc4Jl/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/picie.out)  |
 |MDC   |COCO       |[weight](https://drive.google.com/file/d/1qMfTAU4SE3HfD6CpI4o18Y4oqIvW-rhy/view?usp=sharing)|[log](https://github.com/janghyuncho/PiCIE/blob/master/logs/mdc.out)  |
 |PiCIE | Cityscapes| [weight](https://urldefense.com/v3/__https://drive.google.com/file/d/1phk0hlpFT2RMmOqzQ6Csoj6HgnZFskbK/view?usp=sharing__;!!OToaGQ!4f5kMMLjSy4HWv9ov9Th7sF3SGJ4ZfvKkeQjRLpqnPPoZxGh7Hu5Lcqhg6F-awOuR4lG$) | [log](https://github.com/janghyuncho/PiCIE/blob/master/logs/reproduce/picie_city.out) |
 |MDC   | Cityscapes| [weight](https://drive.google.com/file/d/1TupnmoDH5jR_F4-OOflW5Ok7KH-olhvD/view?usp=sharing) | [log](https://github.com/janghyuncho/PiCIE/blob/master/logs/reproduce/mdc_city.out) |
