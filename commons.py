@@ -21,9 +21,11 @@ def get_model_and_optimizer(args, logger):
 
     # Init optimizer 
     if args.optim_type == 'SGD':
+        logger.info('SGD optimizer is used.')
         optimizer = torch.optim.SGD(filter(lambda x: x.requires_grad, model.module.parameters()), lr=args.lr, \
                                     momentum=args.momentum, weight_decay=args.weight_decay)
     elif args.optim_type == 'Adam':
+        logger.info('Adam optimizer is used.')
         optimizer = torch.optim.Adam(filter(lambda x: x.requires_grad, model.module.parameters()), lr=args.lr)
 
     # optional restart. 
@@ -62,7 +64,7 @@ def run_mini_batch_kmeans(args, logger, dataloader, model, view):
     # Choose which view it is now. 
     dataloader.dataset.view = view
 
-    model.eval()
+    model.train()
     with torch.no_grad():
         for i_batch, (indice, image) in enumerate(dataloader):
             # 1. Compute initial centroids from the first few batches. 

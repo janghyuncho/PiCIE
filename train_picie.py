@@ -7,8 +7,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from data.coco_train_dataset import TrainCOCO
-from data.coco_eval_dataset import EvalCOCO 
 from utils import *
 from commons import * 
 from modules import fpn 
@@ -35,7 +33,7 @@ def parse_arguments():
     parser.add_argument('--batch_size_train', type=int, default=128)
     parser.add_argument('--batch_size_test', type=int, default=128)
     parser.add_argument('--lr', type=float, default=1e-4)
-    parser.add_argument('--weight_decay', type=float, default=5e-4)
+    parser.add_argument('--weight_decay', type=float, default=0)
     parser.add_argument('--momentum', type=float, default=0.9)
     parser.add_argument('--optim_type', type=str, default='Adam')
     parser.add_argument('--num_init_batches', type=int, default=30)
@@ -72,6 +70,11 @@ def parse_arguments():
     parser.add_argument('--eval_only', action='store_true', default=False)
     parser.add_argument('--eval_path', type=str)
 
+    # Cityscapes-specific.
+    parser.add_argument('--cityscapes', action='store_true', default=False)
+    parser.add_argument('--label_mode', type=str, default='gtFine')
+    parser.add_argument('--long_image', action='store_true', default=False)
+    
     return parser.parse_args()
 
 
@@ -160,6 +163,11 @@ def train(args, logger, dataloader, model, classifier1, classifier2, criterion1,
     return losses.avg, losses_cet.avg, losses_cet_within.avg, losses_cet_across.avg, losses_mse.avg
 
 
+def adjust_learning_rate(optimizer, epoch, args):
+    """Sets the learning rate to the initial LR decayed by 10 every 20 epochs"""
+    lr = args.lr * (0.1 ** (epoch // args.decay_epoch))
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = lr
 
 
 def main(args, logger):
@@ -176,9 +184,7 @@ def main(args, logger):
 
     # New trainset inside for-loop.
     inv_list, eqv_list = get_transform_params(args)
-    trainset = TrainCOCO(args.data_root, res1=args.res1, res2=args.res2,\
-                        split='train', mode='compute', labeldir='', inv_list=inv_list, eqv_list=eqv_list, \
-                        thing=args.thing, stuff=args.stuff, scale=(args.min_scale, 1)) # NOTE: For now, max_scale = 1.  
+    trainset = get_dataset(args, mode='train', inv_list=inv_list, eqv_list=eqv_list)
     trainloader = torch.utils.data.DataLoader(trainset, 
                                                 batch_size=args.batch_size_cluster,
                                                 shuffle=False, 
@@ -187,7 +193,7 @@ def main(args, logger):
                                                 collate_fn=collate_train,
                                                 worker_init_fn=worker_init_fn(args.seed))
     
-    testset    = EvalCOCO(args.data_root, res=args.res, split='val', mode='test', stuff=args.stuff, thing=args.thing)
+    testset    = get_dataset(args, mode='train_val')
     testloader = torch.utils.data.DataLoader(testset,
                                              batch_size=args.batch_size_test,
                                              shuffle=False,
@@ -199,137 +205,140 @@ def main(args, logger):
     # Before train.
     _, _ = evaluate(args, logger, testloader, classifier1, model)
     
-    # Train start.
-    for epoch in range(args.start_epoch, args.num_epoch):
-        # Assign probs. 
-        trainloader.dataset.mode = 'compute'
-        trainloader.dataset.reshuffle()
+    if not args.eval_only:
+        # Train start.
+        for epoch in range(args.start_epoch, args.num_epoch):
+            # Assign probs. 
+            trainloader.dataset.mode = 'compute'
+            trainloader.dataset.reshuffle()
 
-        logger.info('\n============================= [Epoch {}] =============================\n'.format(epoch))
-        logger.info('Start computing centroids.')
-        t1 = t.time()
-        centroids1, kmloss1 = run_mini_batch_kmeans(args, logger, trainloader, model, view=1)
-        centroids2, kmloss2 = run_mini_batch_kmeans(args, logger, trainloader, model, view=2)
-        logger.info('-Centroids ready. [Loss: {:.5f}| {:.5f}/ Time: {}]\n'.format(kmloss1, kmloss2, get_datetime(int(t.time())-int(t1))))
+            # Adjust lr if needed. 
+            # adjust_learning_rate(optimizer, epoch, args)
+
+            logger.info('\n============================= [Epoch {}] =============================\n'.format(epoch))
+            logger.info('Start computing centroids.')
+            t1 = t.time()
+            centroids1, kmloss1 = run_mini_batch_kmeans(args, logger, trainloader, model, view=1)
+            centroids2, kmloss2 = run_mini_batch_kmeans(args, logger, trainloader, model, view=2)
+            logger.info('-Centroids ready. [Loss: {:.5f}| {:.5f}/ Time: {}]\n'.format(kmloss1, kmloss2, get_datetime(int(t.time())-int(t1))))
+            
+            # Compute cluster assignment. 
+            t2 = t.time()
+            weight1 = compute_labels(args, logger, trainloader, model, centroids1, view=1)
+            weight2 = compute_labels(args, logger, trainloader, model, centroids2, view=2)
+            logger.info('-Cluster labels ready. [{}]\n'.format(get_datetime(int(t.time())-int(t2)))) 
+            
+            # Criterion.
+            if not args.no_balance:
+                criterion1 = torch.nn.CrossEntropyLoss(weight=weight1).cuda()
+                criterion2 = torch.nn.CrossEntropyLoss(weight=weight2).cuda()
+            else:
+                criterion1 = torch.nn.CrossEntropyLoss().cuda()
+                criterion2 = torch.nn.CrossEntropyLoss().cuda()
+
+            # Setup nonparametric classifier.
+            classifier1 = initialize_classifier(args)
+            classifier2 = initialize_classifier(args)
+            classifier1.module.weight.data = centroids1.unsqueeze(-1).unsqueeze(-1)
+            classifier2.module.weight.data = centroids2.unsqueeze(-1).unsqueeze(-1)
+            freeze_all(classifier1)
+            freeze_all(classifier2)
+
+            # Delete since no longer needed. 
+            del centroids1 
+            del centroids2
+
+            # Set-up train loader.
+            trainset.mode  = 'train'
+            trainloader_loop  = torch.utils.data.DataLoader(trainset, 
+                                                            batch_size=args.batch_size_train, 
+                                                            shuffle=True,
+                                                            num_workers=args.num_workers,
+                                                            pin_memory=True,
+                                                            collate_fn=collate_train,
+                                                            worker_init_fn=worker_init_fn(args.seed))
+
+            logger.info('Start training ...')
+            train_loss, train_cet, cet_within, cet_across, train_mse = train(args, logger, trainloader_loop, model, classifier1, classifier2, criterion1, criterion2, optimizer, epoch) 
+            acc1, res1 = evaluate(args, logger, testloader, classifier1, model)
+            acc2, res2 = evaluate(args, logger, testloader, classifier2, model)
+            
+            logger.info('============== Epoch [{}] =============='.format(epoch))
+            logger.info('  Time: [{}]'.format(get_datetime(int(t.time())-int(t1))))
+            logger.info('  K-Means loss   : {:.5f} | {:.5f}'.format(kmloss1, kmloss2))
+            logger.info('  Training Total Loss  : {:.5f}'.format(train_loss))
+            logger.info('  Training CE Loss (Total | Within | Across) : {:.5f} | {:.5f} | {:.5f}'.format(train_cet, cet_within, cet_across))
+            logger.info('  Training MSE Loss (Total) : {:.5f}'.format(train_mse))
+            logger.info('  [View 1] ACC: {:.4f} | mIoU: {:.4f}'.format(acc1, res1['mean_iou']))
+            logger.info('  [View 2] ACC: {:.4f} | mIoU: {:.4f}'.format(acc2, res2['mean_iou']))
+            logger.info('========================================\n')
+            
+
+            torch.save({'epoch': epoch+1, 
+                        'args' : args,
+                        'state_dict': model.state_dict(),
+                        'classifier1_state_dict' : classifier1.state_dict(),
+                        'classifier2_state_dict' : classifier2.state_dict(),
+                        'optimizer' : optimizer.state_dict(),
+                        },
+                        os.path.join(args.save_model_path, 'checkpoint_{}.pth.tar'.format(epoch)))
+            
+            torch.save({'epoch': epoch+1, 
+                        'args' : args,
+                        'state_dict': model.state_dict(),
+                        'classifier1_state_dict' : classifier1.state_dict(),
+                        'classifier2_state_dict' : classifier2.state_dict(),
+                        'optimizer' : optimizer.state_dict(),
+                        },
+                        os.path.join(args.save_model_path, 'checkpoint.pth.tar'))
         
-        # Compute cluster assignment. 
-        t2 = t.time()
-        weight1 = compute_labels(args, logger, trainloader, model, centroids1, view=1)
-        weight2 = compute_labels(args, logger, trainloader, model, centroids2, view=2)
-        logger.info('-Cluster labels ready. [{}]\n'.format(get_datetime(int(t.time())-int(t2)))) 
-        
-        # Criterion.
-        if not args.no_balance:
-            criterion1 = torch.nn.CrossEntropyLoss(weight=weight1).cuda()
-            criterion2 = torch.nn.CrossEntropyLoss(weight=weight2).cuda()
-        else:
-            criterion1 = torch.nn.CrossEntropyLoss().cuda()
-            criterion2 = torch.nn.CrossEntropyLoss().cuda()
+        # Evaluate.
+        trainset    = get_dataset(args, mode='eval_val')
+        trainloader = torch.utils.data.DataLoader(trainset, 
+                                                    batch_size=args.batch_size_cluster,
+                                                    shuffle=True,
+                                                    num_workers=args.num_workers,
+                                                    pin_memory=True,
+                                                    collate_fn=collate_train,
+                                                    worker_init_fn=worker_init_fn(args.seed))
 
-        # Setup nonparametric classifier.
-        classifier1 = initialize_classifier(args)
-        classifier2 = initialize_classifier(args)
-        classifier1.module.weight.data = centroids1.unsqueeze(-1).unsqueeze(-1)
-        classifier2.module.weight.data = centroids2.unsqueeze(-1).unsqueeze(-1)
-        freeze_all(classifier1)
-        freeze_all(classifier2)
-
-        # Delete since no longer needed. 
-        del centroids1 
-        del centroids2
-
-        # Set-up train loader.
-        trainset.mode  = 'train'
-        trainset.labeldir = args.save_model_path
-        trainloader_loop  = torch.utils.data.DataLoader(trainset, 
-                                                        batch_size=args.batch_size_train, 
-                                                        shuffle=True,
-                                                        num_workers=args.num_workers,
-                                                        pin_memory=True,
-                                                        collate_fn=collate_train,
-                                                        worker_init_fn=worker_init_fn(args.seed))
-
-        logger.info('Start training ...')
-        train_loss, train_cet, cet_within, cet_across, train_mse = train(args, logger, trainloader_loop, model, classifier1, classifier2, criterion1, criterion2, optimizer, epoch) 
-        acc1, res1 = evaluate(args, logger, testloader, classifier1, model)
-        acc2, res2 = evaluate(args, logger, testloader, classifier2, model)
-        
-        logger.info('============== Epoch [{}] =============='.format(epoch))
-        logger.info('  Time: [{}]'.format(get_datetime(int(t.time())-int(t1))))
-        logger.info('  K-Means loss   : {:.5f} | {:.5f}'.format(kmloss1, kmloss2))
-        logger.info('  Training Total Loss  : {:.5f}'.format(train_loss))
-        logger.info('  Training CE Loss (Total | Within | Across) : {:.5f} | {:.5f} | {:.5f}'.format(train_cet, cet_within, cet_across))
-        logger.info('  Training MSE Loss (Total) : {:.5f}'.format(train_mse))
-        logger.info('  [View 1] ACC: {:.4f} | mIoU: {:.4f}'.format(acc1, res1['mean_iou']))
-        logger.info('  [View 2] ACC: {:.4f} | mIoU: {:.4f}'.format(acc2, res2['mean_iou']))
-        logger.info('========================================\n')
-        
-
-        torch.save({'epoch': epoch+1, 
-                    'args' : args,
-                    'state_dict': model.state_dict(),
-                    'classifier1_state_dict' : classifier1.state_dict(),
-                    'classifier2_state_dict' : classifier2.state_dict(),
-                    'optimizer' : optimizer.state_dict(),
-                    },
-                    os.path.join(args.save_model_path, 'checkpoint_{}.pth.tar'.format(epoch)))
-        
-        torch.save({'epoch': epoch+1, 
-                    'args' : args,
-                    'state_dict': model.state_dict(),
-                    'classifier1_state_dict' : classifier1.state_dict(),
-                    'classifier2_state_dict' : classifier2.state_dict(),
-                    'optimizer' : optimizer.state_dict(),
-                    },
-                    os.path.join(args.save_model_path, 'checkpoint.pth.tar'))
-    
-    # Evaluate.
-    trainset    = EvalCOCO(args.data_root, res=args.res, split=args.val_type, mode='test', label=False) 
-    trainloader = torch.utils.data.DataLoader(trainset, 
-                                                batch_size=args.batch_size_cluster,
-                                                shuffle=True,
+        testset    = get_dataset(args, mode='eval_test')
+        testloader = torch.utils.data.DataLoader(testset, 
+                                                batch_size=args.batch_size_test,
+                                                shuffle=False,
                                                 num_workers=args.num_workers,
                                                 pin_memory=True,
-                                                collate_fn=collate_train,
+                                                collate_fn=collate_eval,
                                                 worker_init_fn=worker_init_fn(args.seed))
 
-    testset    = EvalCOCO(args.data_root, res=args.res, split='val', mode='test', stuff=args.stuff, thing=args.thing)
-    testloader = torch.utils.data.DataLoader(testset, 
-                                             batch_size=args.batch_size_test,
-                                             shuffle=False,
-                                             num_workers=args.num_workers,
-                                             pin_memory=True,
-                                             collate_fn=collate_eval,
-                                             worker_init_fn=worker_init_fn(args.seed))
-
-    # Evaluate with fresh clusters.
-    acc_list_new = []  
-    res_list_new = []                 
-    logger.info('Start computing centroids.')
-    if args.repeats > 0:
-        for _ in range(args.repeats):
-            t1 = t.time()
-            centroids1, kmloss1 = run_mini_batch_kmeans(args, logger, trainloader, model, view=-1)
-            logger.info('-Centroids ready. [Loss: {:.5f}/ Time: {}]\n'.format(kmloss1, get_datetime(int(t.time())-int(t1))))
-            
-            classifier1 = initialize_classifier(args)
-            classifier1.module.weight.data = centroids1.unsqueeze(-1).unsqueeze(-1)
-            freeze_all(classifier1)
-            
+        # Evaluate with fresh clusters.
+        acc_list_new = []  
+        res_list_new = []                 
+        logger.info('Start computing centroids.')
+        if args.repeats > 0:
+            for _ in range(args.repeats):
+                t1 = t.time()
+                centroids1, kmloss1 = run_mini_batch_kmeans(args, logger, trainloader, model, view=-1)
+                logger.info('-Centroids ready. [Loss: {:.5f}/ Time: {}]\n'.format(kmloss1, get_datetime(int(t.time())-int(t1))))
+                
+                classifier1 = initialize_classifier(args)
+                classifier1.module.weight.data = centroids1.unsqueeze(-1).unsqueeze(-1)
+                freeze_all(classifier1)
+                
+                acc_new, res_new = evaluate(args, logger, testloader, classifier1, model)
+                acc_list_new.append(acc_new)
+                res_list_new.append(res_new)
+        else:
             acc_new, res_new = evaluate(args, logger, testloader, classifier1, model)
             acc_list_new.append(acc_new)
             res_list_new.append(res_new)
-    else:
-        acc_new, res_new = evaluate(args, logger, testloader, classifier1, model)
-        acc_list_new.append(acc_new)
-        res_list_new.append(res_new)
 
-    logger.info('Average overall pixel accuracy [NEW] : {:.3f} +/- {:.3f}.'.format(np.mean(acc_list_new), np.std(acc_list_new)))
-    logger.info('Average mIoU [NEW] : {:.3f} +/- {:.3f}. '.format(np.mean([res['mean_iou'] for res in res_list_new]), 
-                                                                  np.std([res['mean_iou'] for res in res_list_new])))
-    logger.info('Experiment done. [{}]\n'.format(get_datetime(int(t.time())-int(t_start))))
-    
-    
+        logger.info('Average overall pixel accuracy [NEW] : {:.3f} +/- {:.3f}.'.format(np.mean(acc_list_new), np.std(acc_list_new)))
+        logger.info('Average mIoU [NEW] : {:.3f} +/- {:.3f}. '.format(np.mean([res['mean_iou'] for res in res_list_new]), 
+                                                                    np.std([res['mean_iou'] for res in res_list_new])))
+        logger.info('Experiment done. [{}]\n'.format(get_datetime(int(t.time())-int(t_start))))
+        
+        
 if __name__=='__main__':
     args = parse_arguments()
 

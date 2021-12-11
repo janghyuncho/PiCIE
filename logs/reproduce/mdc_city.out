@@ -1,0 +1,423 @@
+/scratch/cluster/jc88964/anaconda3/envs/picie/lib/python3.7/site-packages/sklearn/utils/linear_assignment_.py:22: FutureWarning: The linear_assignment_ module is deprecated in 0.21 and will be removed from 0.23. Use scipy.optimize.linear_sum_assignment instead.
+  FutureWarning)
+Namespace(K_test=27, K_train=27, X=80, arch='resnet18', augment=True, batch_size_cluster=128, batch_size_test=128, batch_size_train=128, blur=True, cityscapes=True, comment='', data_root='datasets/cityscapes/', equiv=True, eval_only=False, eval_path=None, fullcoco=False, grey=True, h_flip=True, in_dim=128, jitter=True, kmeans_n_iter=30, label_mode='gtFine', long_image=False, lr=0.001, metric_test='cosine', metric_train='cosine', min_scale=0.5, momentum=0.9, nonparametric=False, num_batches=1, num_epoch=10, num_init_batches=30, num_workers=4, optim_type='Adam', pretrain=True, random_crop=True, repeats=1, res=320, res1=320, res2=640, restart=False, restart_path=None, save_eval_path='results/reproduce/cityscapes/mdc/train/1/km_30_1_train_bn/augmented/res1=320_res2=640/jitter=True_blur=True_grey=True/equiv/h_flip=True_v_flip=False_crop=True/min_scale\\=0.5/K_train=27_cosine/K_test=27_cosine', save_model_path='results/reproduce/cityscapes/mdc/train/1/km_30_1_train_bn/augmented/res1=320_res2=640/jitter=True_blur=True_grey=True/equiv/h_flip=True_v_flip=False_crop=True/min_scale\\=0.5/K_train=27_cosine', save_root='results/reproduce/cityscapes/mdc/train/1/km_30_1_train_bn/augmented/res1=320_res2=640/jitter=True_blur=True_grey=True/equiv/h_flip=True_v_flip=False_crop=True/min_scale\\=0.5', seed=1, stuff=False, thing=False, v_flip=False, val_type='val', version=7, weight_decay=0.0005)
+Adam optimizer is used.
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 29.2446
+mIOU - All: 3.1794
+
+============================= [Epoch 0] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.5171 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.5175
+-Centroids ready. [0:0:28:13]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:23:50]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 31.2881
+mIOU - All: 8.1299
+========== Epoch [0] ==========
+  Time total : [0:1:15:16].
+  K-Means loss   : 0.51776.
+  Training loss  : 2.71490.
+  ACC: 31.2881 | mIoU: 8.1299
+================================
+
+
+============================= [Epoch 1] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.1882 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.1873
+-Centroids ready. [0:0:23:36]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:19:7]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 37.4753
+mIOU - All: 8.3659
+========== Epoch [1] ==========
+  Time total : [0:1:7:36].
+  K-Means loss   : 0.18738.
+  Training loss  : 2.51994.
+  ACC: 37.4753 | mIoU: 8.3659
+================================
+
+
+============================= [Epoch 2] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.1203 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.1202
+-Centroids ready. [0:0:29:0]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:21:44]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 39.4089
+mIOU - All: 8.5133
+========== Epoch [2] ==========
+  Time total : [0:1:13:8].
+  K-Means loss   : 0.12036.
+  Training loss  : 2.43685.
+  ACC: 39.4089 | mIoU: 8.5133
+================================
+
+
+============================= [Epoch 3] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.1130 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.1130
+-Centroids ready. [0:0:24:0]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:20:9]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 40.2728
+mIOU - All: 7.9877
+========== Epoch [3] ==========
+  Time total : [0:1:11:6].
+  K-Means loss   : 0.11319.
+  Training loss  : 2.37918.
+  ACC: 40.2728 | mIoU: 7.9877
+================================
+
+
+============================= [Epoch 4] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.0881 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.0880
+-Centroids ready. [0:0:27:9]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:19:40]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 40.4841
+mIOU - All: 8.2279
+========== Epoch [4] ==========
+  Time total : [0:1:8:55].
+  K-Means loss   : 0.08787.
+  Training loss  : 2.32256.
+  ACC: 40.4841 | mIoU: 8.2279
+================================
+
+
+============================= [Epoch 5] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.0956 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.0953
+-Centroids ready. [0:0:24:12]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:22:23]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 42.4989
+mIOU - All: 8.3647
+========== Epoch [5] ==========
+  Time total : [0:1:12:40].
+  K-Means loss   : 0.09521.
+  Training loss  : 2.25190.
+  ACC: 42.4989 | mIoU: 8.3647
+================================
+
+
+============================= [Epoch 6] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.0636 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.0639
+-Centroids ready. [0:0:25:24]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:19:25]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 42.9933
+mIOU - All: 7.9496
+========== Epoch [6] ==========
+  Time total : [0:1:7:0].
+  K-Means loss   : 0.06389.
+  Training loss  : 2.22499.
+  ACC: 42.9933 | mIoU: 7.9496
+================================
+
+
+============================= [Epoch 7] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.0556 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.0557
+-Centroids ready. [0:0:25:57]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:23:40]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 42.4900
+mIOU - All: 7.4535
+========== Epoch [7] ==========
+  Time total : [0:1:14:18].
+  K-Means loss   : 0.05577.
+  Training loss  : 2.19134.
+  ACC: 42.4900 | mIoU: 7.4535
+================================
+
+
+============================= [Epoch 8] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.0454 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.0449
+-Centroids ready. [0:0:24:5]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:19:29]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 41.8911
+mIOU - All: 6.9310
+========== Epoch [8] ==========
+  Time total : [0:1:6:48].
+  K-Means loss   : 0.04488.
+  Training loss  : 2.15638.
+  ACC: 41.8911 | mIoU: 6.9310
+================================
+
+
+============================= [Epoch 9] =============================
+
+Start computing centroids.
+Batch input size : [128, 3, 320, 320]
+Batch feature : [128, 128, 80, 80]
+[Saving features]: 0 / 169 | [K-Means Loss]: 0.0000
+Initial k-means loss: 0.0379 
+[Saving features]: 100 / 169 | [K-Means Loss]: 0.0378
+-Centroids ready. [0:0:27:8]
+
+Centroid size      : [27, 128]
+Batch input size   : [128, 3, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+[Assigning labels] 0 / 169
+-Cluster labels ready. [0:0:22:7]
+
+Start training ...
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 80, 80]
+Batch feature size : [128, 128, 80, 80]
+
+0 / 169	
+====== METRIC TEST : cosine ======
+
+Batch input size   : [128, 3, 320, 320]
+Batch label size   : [128, 320, 320]
+Batch feature size : [128, 128, 80, 80]
+
+0/28
+20/28
+ACC  - All: 44.3811
+mIOU - All: 6.6877
+========== Epoch [9] ==========
+  Time total : [0:1:12:52].
+  K-Means loss   : 0.03783.
+  Training loss  : 2.12418.
+  ACC: 44.3811 | mIoU: 6.6877
+================================
