@@ -18,6 +18,8 @@ Contact: Jang Hyun Cho [janghyuncho7@utexas.edu](mailto:janghyuncho7@utexas.edu)
 
 Please feel free to reach out for any questions or discussions!
 ## News 
+[12/10/2021] Fixed visualization notebook. 
+
 [12/10/2021] Training and evaluation code for cityscapes dataset for PiCIE and MDC with trained weights and logs. 
 
 [07/31/2021] Minor update on the training dataset module (please see this [issue](https://github.com/janghyuncho/PiCIE/issues/7)).
