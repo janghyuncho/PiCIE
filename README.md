@@ -1,6 +1,6 @@
 # PiCIE: Unsupervised Semantic Segmentation using Invariance and Equivariance in Clustering
 
-*[Jang Hyun Cho](https://sites.google.com/view/janghyuncho/)*<sup>1</sup>,
+*[Jang Hyun Cho](https://janghyuncho.github.io)*<sup>1</sup>,
 *[Utkarsh Mall](https://www.cs.cornell.edu/~utkarshm/)*<sup>2</sup>,
 *[Kavita Bala](http://www.cs.cornell.edu/~kb/)*<sup>2</sup>,
 *[Bharath Hariharan](http://home.bharathh.info)*<sup>2</sup>
@@ -106,11 +106,13 @@ We prepared [a jupyter notebook](visualize.ipynb) for visualization.
 ## Citation
 If you find PiCIE useful in your research, please consider citing:
 ```
-@inproceedings{Cho2021PiCIE,
-  title = {PiCIE: Unsupervised Semantic Segmentation using Invariance and Equivariance in Clustering},
-  author = {Jang Hyun Cho and  Utkarsh Mall and  Kavita Bala and  Bharath Hariharan},
-  year = {2021},
-  booktitle = {CVPR}
+@InProceedings{Cho_2021_CVPR,
+    author    = {Cho, Jang Hyun and Mall, Utkarsh and Bala, Kavita and Hariharan, Bharath},
+    title     = {PiCIE: Unsupervised Semantic Segmentation Using Invariance and Equivariance in Clustering},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2021},
+    pages     = {16794-16804}
 }
 ```
 ## Acknowledgements 
